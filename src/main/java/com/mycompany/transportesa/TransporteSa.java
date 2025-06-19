@@ -192,63 +192,15 @@ public class TransporteSa {
         scanner.close();
 
         scanner.close();
-
-        try {
+      
             Colectivo colectivo1 = new Colectivo("AAA111", 45, 2018, 150000.5, new ArrayList<>(), true);
             Colectivo colectivo2 = new Colectivo("BBB222", 30, 2020, 90000, new ArrayList<>(), false);
-
-            vehiculoService.registrarVehiculo(colectivo1);
-            vehiculoService.registrarVehiculo(colectivo2);
-
-            viajeService.planificarViaje(
-                    "20-06-2025", "22:00", "23:00",
-                    1500, 300, 8000.0,
-                    ciudad1, ciudad2,
-                    colectivo1, chofer1
-            );
-
-            // Este fallará si es menos de 8 horas después 
-            viajeService.planificarViaje(
-                    "21-06-2025", "06:00", "12:00",
-                    1300, 250.0, 7000,
-                    ciudad2, ciudad1,
-                    colectivo2, chofer1
-            );
-            /**
-             * viajeService.planificarViaje( "20-06-2025", "23:00", "07:00",
-             * 1500, 300, 8000.0, ciudad1, ciudad2, colectivo1, chofer1 );
-             *
-             * // Este fallará si es menos de 8 horas después
-             * viajeService.planificarViaje( "21-06-2025", "10:00", "12:00",
-             * 1300, 250.0, 7000, ciudad2, ciudad1, colectivo2, chofer1 );*
-             */
-            /*viajeService.planificarViaje(
-                    "20-06-2025", "08:00", "11:00",
-                    1500, 300, 8000.0,
-                    ciudad1, ciudad2,
-                    colectivo1, chofer1
-            );
-
-            viajeService.planificarViaje(
-                    "21-06-2025", "15:00", "18:00",
-                    1300, 250.0, 7000,
-                    ciudad2, ciudad1,
-                    colectivo2, chofer2
-            );*/
 
             //TEST DE PRUEBA DE IMPLEMENTACION DE QUE NO SUPERPONGAN VIAJES A UN MISMO CHOFER Y UN CHOFER DEBA DESCANSAR AL MENOS 8 HORAS
             System.out.println("----------------------------------------------------------------------");
             System.out.println("        Informe de viajes a realizar de un colectivo determinado");
             System.out.println("----------------------------------------------------------------------");
             viajeService.mostrarViajesPorColectivoDetallado(colectivo1);
-
-        } catch (VehiculoYaRegistradoExcepcion e) {
-            System.out.println("Error al registrar vehículo: " + e.getMessage());
-        } catch (ChoferOcupadoExcepcion e) {
-            System.out.println("Error al planificar viaje: " + e.getMessage());
-        } catch (CiudadesIgualesExcepcion e) {
-            System.out.println("Error al registrar cuidad origen y destino iguales: " + e.getMessage());
-        }
 
     }
 }

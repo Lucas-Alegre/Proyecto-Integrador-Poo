@@ -64,8 +64,8 @@ public class Chofer extends Persona {
             LocalDateTime nuevaLlegada = LocalDateTime.parse(fecha + " " + horaLlegada, formatter);
 
             for (Viaje v : viajeLista) {
-                LocalDateTime salidaExistente = LocalDateTime.parse(v.getFecha() + " " + v.getHorarioSalida(), formatter);
-                LocalDateTime llegadaExistente = LocalDateTime.parse(v.getFecha() + " " + v.getHorarioLlegada(), formatter);
+                LocalDateTime salidaExistente = LocalDateTime.parse(v.getFechaDeSalida() + " " + v.getHorarioSalida(), formatter);
+                LocalDateTime llegadaExistente = LocalDateTime.parse(v.getFechaDeSalida() + " " + v.getHorarioLlegada(), formatter);
 
                 if(nuevaSalida.isBefore(llegadaExistente.plusHours(8))) {
                     return false;

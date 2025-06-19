@@ -13,7 +13,8 @@ import java.util.List;
  */
 public class Viaje {
 
-    private String fecha;
+    private String fechaDeSalida;
+    private String fechaDeLlegada;
     private String horarioSalida;
     private String horarioLlegada;
     private double precioPorPasajero;
@@ -24,11 +25,10 @@ public class Viaje {
     private Ciudad ciudadDestino;
     private Vehiculo vehiculo;
     private Chofer chofer;
-    private Reserva reserva;
-    private ArrayList<Pasajero> pasajeroLista;
 
-    public Viaje(String fecha, String horarioSalida, String horarioLlegada, double precioPorPasajero, double distanciaEnKilometro, double costoPorKilometro, EstadoDeViajeEnum estadoDeViaje, Ciudad ciudadOrigen, Ciudad ciudadDestino, Vehiculo vehiculo, Chofer chofer, Reserva reserva, ArrayList<Pasajero> pasajeroLista) {
-        this.fecha = fecha;
+    public Viaje(String fechaDeSalida, String fechaDeLlegada, String horarioSalida, String horarioLlegada, double precioPorPasajero, double distanciaEnKilometro, double costoPorKilometro, EstadoDeViajeEnum estadoDeViaje, Ciudad ciudadOrigen, Ciudad ciudadDestino, Vehiculo vehiculo, Chofer chofer) {
+        this.fechaDeSalida = fechaDeSalida;
+        this.fechaDeLlegada = fechaDeLlegada;
         this.horarioSalida = horarioSalida;
         this.horarioLlegada = horarioLlegada;
         this.precioPorPasajero = precioPorPasajero;
@@ -39,16 +39,22 @@ public class Viaje {
         this.ciudadDestino = ciudadDestino;
         this.vehiculo = vehiculo;
         this.chofer = chofer;
-        this.reserva = reserva;
-        this.pasajeroLista = pasajeroLista;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getFechaDeSalida() {
+        return fechaDeSalida;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFechaDeSalida(String fechaDeSalida) {
+        this.fechaDeSalida = fechaDeSalida;
+    }
+
+    public String getFechaDeLlegada() {
+        return fechaDeLlegada;
+    }
+
+    public void setFechaDeLlegada(String fechaDeLlegada) {
+        this.fechaDeLlegada = fechaDeLlegada;
     }
 
     public String getHorarioSalida() {
@@ -131,29 +137,8 @@ public class Viaje {
         this.chofer = chofer;
     }
 
-    public Reserva getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-    }
-
-    public ArrayList<Pasajero> getPasajeroLista() {
-        return pasajeroLista;
-    }
-
-    public void setPasajeroLista(ArrayList<Pasajero> pasajeroLista) {
-        this.pasajeroLista = pasajeroLista;
-    }
-
-    public void agregarPasajero(Pasajero pasajero) {
-        pasajeroLista.add(pasajero);
-    }
-
     @Override
     public String toString() {
-        return "Viaje{" + "fecha=" + fecha + ", horarioSalida=" + horarioSalida + ", horarioLlegada=" + horarioLlegada + ", precioPorPasajero=" + precioPorPasajero + ", distanciaEnKilometro=" + distanciaEnKilometro + ", costoPorKilometro=" + costoPorKilometro + ", estadoDeViaje=" + estadoDeViaje + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", vehiculo=" + vehiculo + ", chofer=" + chofer + ", reserva=" + reserva + ", pasajeroLista=" + pasajeroLista + '}';
+        return "Viaje{" + "fechaDeSalida=" + fechaDeSalida + ", fechaDeLlegada=" + fechaDeLlegada + ", horarioSalida=" + horarioSalida + ", horarioLlegada=" + horarioLlegada + ", precioPorPasajero=" + precioPorPasajero + ", distanciaEnKilometro=" + distanciaEnKilometro + ", costoPorKilometro=" + costoPorKilometro + ", estadoDeViaje=" + estadoDeViaje + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", vehiculo=" + vehiculo + ", chofer=" + chofer + '}';
     }
-
 }
