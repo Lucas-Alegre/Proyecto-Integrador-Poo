@@ -14,8 +14,8 @@ public class Colectivo extends Vehiculo {
 
     private boolean pisoDoble;
 
-    public Colectivo(String patente,int anioFabricacion, double kilometraje, ArrayList<Viaje> viajeLista, boolean pisoDoble) {
-        super(patente, anioFabricacion, kilometraje, viajeLista);
+    public Colectivo(String patente, int capacidad, ArrayList<Viaje> viajeLista, boolean pisoDoble) {
+        super(patente, capacidad, viajeLista);
         this.pisoDoble = pisoDoble;
     }
 
@@ -27,10 +27,10 @@ public class Colectivo extends Vehiculo {
         this.pisoDoble = pisoDoble;
     }
 
-    public String getColectivoToUser(){
-        return "Colectivo [Patente: " + super.getPatente()+" ]";
+    public String getColectivoToUser() {
+        return "Colectivo [Patente: " + super.getPatente() + " ]";
     }
-    
+
     @Override
     public String toString() {
         return "Colectivo{" + super.toString() + ", pisoDoble=" + pisoDoble + '}';

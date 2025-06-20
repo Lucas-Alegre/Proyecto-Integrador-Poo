@@ -66,18 +66,18 @@ public class TransporteSa {
             System.out.println("Error al registrar chofer: " + e.getMessage());
         }*/
         // Crear colectivos
-        Colectivo col1 = new Colectivo("AAA111", 2020, 150000, new ArrayList<>(), true);
-        Colectivo col2 = new Colectivo("BBB222", 2019, 140000, new ArrayList<>(), false);
-        Colectivo col3 = new Colectivo("CCC333", 2021, 160000, new ArrayList<>(), true);
-        Colectivo col4 = new Colectivo("DDD444", 2022, 170000, new ArrayList<>(), false);
-        Colectivo col5 = new Colectivo("EEE555", 2018, 130000, new ArrayList<>(), true);
+        Colectivo col1 = new Colectivo("AAA111", 60, new ArrayList<>(), true);
+        Colectivo col2 = new Colectivo("BBB222", 20, new ArrayList<>(), false);
+        Colectivo col3 = new Colectivo("CCC333", 30, new ArrayList<>(), true);
+        Colectivo col4 = new Colectivo("DDD444", 15, new ArrayList<>(), false);
+        Colectivo col5 = new Colectivo("EEE555", 50, new ArrayList<>(), true);
 
         // Crear minibuses
-        Minibus minibus1 = new Minibus("ABA212", 2010, 450000, new ArrayList<>(), true, true); // si anda mal rompe acàs no sigue abajo y va al swirch
-        Minibus minibus2 = new Minibus("XCD242", 2011, 350000, new ArrayList<>(), false, true);
-        Minibus minibus3 = new Minibus("LAM864", 2012, 430000, new ArrayList<>(), true, false);
-        Minibus minibus4 = new Minibus("PQY936", 2014, 290000, new ArrayList<>(), false, false);
-        Minibus minibus5 = new Minibus("PLAE23", 2016, 310000, new ArrayList<>(), true, true);
+        Minibus minibus1 = new Minibus("ABA212", 10, new ArrayList<>(), true, true); // si anda mal rompe acàs no sigue abajo y va al swirch
+        Minibus minibus2 = new Minibus("XCD242",20, new ArrayList<>(), false, true);
+        Minibus minibus3 = new Minibus("LAM864", 20, new ArrayList<>(), true, false);
+        Minibus minibus4 = new Minibus("PQY936", 10, new ArrayList<>(), false, false);
+        Minibus minibus5 = new Minibus("PLAE23", 15, new ArrayList<>(), true, true);
 
         /*try {
             vehiculoService.registrarVehiculo(col1);
@@ -271,12 +271,8 @@ public class TransporteSa {
                             System.out.print("Patente: ");
                             String patente = scanner.nextLine();
 
-                            System.out.print("Año de Fabricación: ");
-                            int anioFabricacion = scanner.nextInt();
-                            scanner.nextLine();
-
-                            System.out.print("Kilometraje: ");
-                            double kilometraje = scanner.nextDouble();
+                            System.out.print("Capacidad del Vehiculo: ");
+                            int capacidad = scanner.nextInt();
                             scanner.nextLine();
 
                             ArrayList<Viaje> viajes = new ArrayList<>(); // Lista vacía
@@ -320,11 +316,11 @@ public class TransporteSa {
 
                             //Primero se crea el Vehiculo.
                             if (tipoDeVehiculo.equals("colectivo")) {
-                                Vehiculo vehiculoColectivo = new Colectivo(patente, anioFabricacion, kilometraje, viajes, vehiculoConPisoDoble);
+                                Vehiculo vehiculoColectivo = new Colectivo(patente,capacidad, viajes, vehiculoConPisoDoble);
                                 vehiculoService.registrarVehiculo(vehiculoColectivo);
                                 VehiculosExitoso = true;
                             } else {
-                                Vehiculo vehiculoMinibus = new Minibus(patente, anioFabricacion, kilometraje, viajes, tieneBodega, tieneAireAcondicionado);
+                                Vehiculo vehiculoMinibus = new Minibus(patente,capacidad, viajes, tieneBodega, tieneAireAcondicionado);
                                 vehiculoService.registrarVehiculo(vehiculoMinibus);
                                 VehiculosExitoso = true;
                             }
