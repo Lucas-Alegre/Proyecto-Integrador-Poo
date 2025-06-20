@@ -14,12 +14,14 @@ public class Ciudad {
 
     private String nombre;
     private ProvinciaEnum provincia;
-    private ArrayList<Viaje> OrigenLista; //Hace falta, creo que no tendria sentido?
-    private ArrayList<Viaje> DestinoLista;//?? - Para que lo necesitariamos?
+    private String codigoPostal;
+    private ArrayList<Viaje> OrigenLista;
+    private ArrayList<Viaje> DestinoLista;
 
-    public Ciudad(String nombre, ProvinciaEnum provincia) {
+    public Ciudad(String nombre, ProvinciaEnum provincia, String codigoPostal) {
         this.nombre = nombre;
         this.provincia = provincia;
+        this.codigoPostal = codigoPostal;
         this.OrigenLista = new ArrayList<>();
         this.DestinoLista = new ArrayList<>();
     }
@@ -30,6 +32,14 @@ public class Ciudad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getCodigoPostal() {
+        return codigoPostal;
+    }
+
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
     }
 
     public ProvinciaEnum getProvincia() {
@@ -58,6 +68,6 @@ public class Ciudad {
 
     @Override
     public String toString() {
-        return "Ciudad{" + "nombre=" + nombre + ", provincia=" + provincia + '}'; //+ ", OrigenLista=" + OrigenLista + ", DestinoLista=" + DestinoLista + '}';
+        return "Ciudad{" + "nombre=" + nombre + ", provincia=" + provincia + ", codigoPostal=" + codigoPostal + ", OrigenLista=" + OrigenLista + ", DestinoLista=" + DestinoLista + '}';
     }
 }

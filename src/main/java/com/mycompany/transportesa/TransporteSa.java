@@ -35,6 +35,7 @@ public class TransporteSa {
         VehiculoService vehiculoService = new VehiculoService();
         ViajeService viajeService = new ViajeService();
         InformeCantidadViajesService informe = new InformeCantidadViajesService();
+        CiudadService ciudadService = new CiudadService();
 
         // Crear choferes
         Chofer chofer1 = new Chofer(12345678, "Carlos", "Pérez", "ABC123", new ArrayList<>(), new ArrayList<>());
@@ -48,7 +49,7 @@ public class TransporteSa {
         Chofer chofer9 = new Chofer(77777777, "Tomás", "García", "LIC007", new ArrayList<>(), new ArrayList<>());
         Chofer chofer10 = new Chofer(88888888, "Lucía", "Morales", "LIC008", new ArrayList<>(), new ArrayList<>());
 
-        try {
+        /*try {
             //choferService.registrarChofer(chofer1);
             //choferService.registrarChofer(chofer2);
             choferService.registrarChofer(chofer3);
@@ -61,7 +62,7 @@ public class TransporteSa {
             choferService.registrarChofer(chofer10);
         } catch (ChoferYaRegistradoExcepcion e) {
             System.out.println("Error al registrar chofer: " + e.getMessage());
-        }
+        }*/
 
         // Crear colectivos
         Colectivo col1 = new Colectivo("AAA111", 50, 2020, 150000, new ArrayList<>(), true);
@@ -77,7 +78,7 @@ public class TransporteSa {
         Minibus minibus4 = new Minibus("PQY936", 25, 2014, 290000, new ArrayList<>(), false, false);
         Minibus minibus5 = new Minibus("PLAE23", 30, 2016, 310000, new ArrayList<>(), true, true);
 
-        try {
+        /*try {
             vehiculoService.registrarVehiculo(col1);
             vehiculoService.registrarVehiculo(col2);
             vehiculoService.registrarVehiculo(col3);
@@ -91,19 +92,19 @@ public class TransporteSa {
             vehiculoService.registrarVehiculo(minibus5);
         } catch (VehiculoYaRegistradoExcepcion e) {
             System.out.println("Error al registrar vehículo: " + e.getMessage());
-        }
+        }*/
 
         // Crear ciudades (una por provincia)
-        Ciudad ciudad1 = new Ciudad("La Plata", ProvinciaEnum.BUENOS_AIRES);
-        Ciudad ciudad2 = new Ciudad("Resistencia", ProvinciaEnum.CHACO);
-        Ciudad ciudad3 = new Ciudad("Córdoba", ProvinciaEnum.CORDOBA);
-        Ciudad ciudad4 = new Ciudad("Rawson", ProvinciaEnum.CHUBUT);
-        Ciudad ciudad5 = new Ciudad("Mendoza", ProvinciaEnum.MENDOZA);
-        Ciudad ciudad6 = new Ciudad("Posadas", ProvinciaEnum.MISIONES);
-        Ciudad ciudad7 = new Ciudad("Salta", ProvinciaEnum.SALTA);
-        Ciudad ciudad8 = new Ciudad("Ushuaia", ProvinciaEnum.TIERRA_DEL_FUEGO);
-        Ciudad ciudad9 = new Ciudad("Santa Rosa", ProvinciaEnum.LA_PAMPA);
-        Ciudad ciudad10 = new Ciudad("Paraná", ProvinciaEnum.ENTRE_RIOS);
+        Ciudad ciudad1 = new Ciudad("La Plata", ProvinciaEnum.BUENOS_AIRES,"1");
+        Ciudad ciudad2 = new Ciudad("Resistencia", ProvinciaEnum.CHACO,"2");
+        Ciudad ciudad3 = new Ciudad("Córdoba", ProvinciaEnum.CORDOBA,"3");
+        Ciudad ciudad4 = new Ciudad("Rawson", ProvinciaEnum.CHUBUT,"4");
+        Ciudad ciudad5 = new Ciudad("Mendoza", ProvinciaEnum.MENDOZA,"5");
+        Ciudad ciudad6 = new Ciudad("Posadas", ProvinciaEnum.MISIONES,"6");
+        Ciudad ciudad7 = new Ciudad("Salta", ProvinciaEnum.SALTA,"7");
+        Ciudad ciudad8 = new Ciudad("Ushuaia", ProvinciaEnum.TIERRA_DEL_FUEGO,"8");
+        Ciudad ciudad9 = new Ciudad("Santa Rosa", ProvinciaEnum.LA_PAMPA,"9");
+        Ciudad ciudad10 = new Ciudad("Paraná", ProvinciaEnum.ENTRE_RIOS,"10");
 
         // Menú interactivo
         int opcion;
@@ -112,12 +113,13 @@ public class TransporteSa {
             System.out.println("------------------BIENVENIDO A TRANSPORTE S.A--------------------");
             System.out.println("-------------------------------MENU------------------------------");
             System.out.println("-------------------------------------------------------------------");
-            System.out.println("                 " + "1. Cargar choferes ");
-            System.out.println("                 " + "2. Cargar vehiculos ");
-            System.out.println("                 " + "3. Planificar viaje");
-            System.out.println("                 " + "4. Mostrar viajes programados detalladamente");
-            System.out.println("                 " + "5. Mostrar viajes por colectivo");
-            System.out.println("                 " + "6. Informe de cantidad de viajes por chofer");
+            System.out.println("                 " + "1. Cargar ciudad ");
+            System.out.println("                 " + "2. Cargar choferes ");
+            System.out.println("                 " + "3. Cargar vehiculos ");
+            System.out.println("                 " + "4. Planificar viaje");
+            System.out.println("                 " + "5. Mostrar viajes programados detalladamente");
+            System.out.println("                 " + "6. Mostrar viajes por colectivo");
+            System.out.println("                 " + "7. Informe de cantidad de viajes por chofer");
             System.out.println("                 " + "0. Salir");
             System.out.println("-------------------------------------------------------------------");
             System.out.print("Ingrese opción: ");
@@ -132,6 +134,55 @@ public class TransporteSa {
             scanner.nextLine();
             switch (opcion) {
                 case 1:
+                    System.out.println("Registrar Ciudad manualmente");
+                    boolean CiudadExitoso = false; // Ver si toda esta logica se la puede sacar hacia una funcion, y tener un Min mas ordenado
+                    String continuarRegistrRegistroCiudad;
+                    do {
+                        try {
+                            System.out.print("Nombre: ");
+                            String nombreCiudad = scanner.nextLine();
+
+                            System.out.print("Provincia: ");
+                            String provincia = scanner.nextLine();
+
+                            System.out.print("Codigo Postal: ");
+                            String codigoPostal = scanner.nextLine();
+                            
+                            //logica para validad la provincia a un enum
+                            
+                            String nombreProvinciaEnum = provincia.toUpperCase().replace(" ", "_");
+                            ProvinciaEnum provinciaConvertida = ProvinciaEnum.valueOf(nombreProvinciaEnum);
+                            
+                            for(Ciudad c : ciudadService.getListadoCiudades()){
+                                if(c.getCodigoPostal().equalsIgnoreCase(codigoPostal)){ 
+                                    throw new CiudadesIgualesExcepcion("Esta Ciudad ya Existe con este codigo Postal.");
+                                }
+                                if(c.getNombre().equalsIgnoreCase(nombreCiudad)&&c.getProvincia()==provinciaConvertida){
+                                    throw new CiudadesIgualesExcepcion("Esta Ciudad ya Existe en esta provincia");
+                                }
+                            }
+                            
+                            Ciudad ciudadToRegistrar = new Ciudad(nombreCiudad,provinciaConvertida, codigoPostal);
+                            
+                            ciudadService.addCiudad(ciudadToRegistrar);;
+                            CiudadExitoso = true;
+                        
+                        } catch (CiudadesIgualesExcepcion e) {
+                            System.out.println("Error: " + e.getMessage());
+                        } 
+                        
+                        if (CiudadExitoso) {
+                            System.out.print("¿Desea ingresar otra Ciudad? (s/n): ");
+                            continuarRegistrRegistroCiudad = scanner.nextLine().trim().toLowerCase();
+                        } else {
+                            System.out.print("No lograste Registrar una Ciudad, ¿Deseas intentarlo nuevamente e ingresar otra Ciudad? (s/n): ");
+                            continuarRegistrRegistroCiudad = scanner.nextLine().trim().toLowerCase();
+                        }
+
+                    } while (continuarRegistrRegistroCiudad.equals("s"));
+
+                    break;
+                case 2:
                     System.out.println("Registrar chofer manualmente");
                     boolean registroExitoso = false; // Ver si toda esta logica se la puede sacar hacia una funcion, y tener un Min mas ordenado
                     String continuar;
@@ -211,7 +262,7 @@ public class TransporteSa {
                     } while (continuar.equals("s"));
 
                     break;
-                case 2:
+                case 3:
                     System.out.println("Registrar Vehiculos manualmente");
                     boolean VehiculosExitoso = false; // Ver si toda esta logica se la puede sacar hacia una funcion, y tener un Min mas ordenado
                     String continuarRegistrRegistroVehiculo;
@@ -306,22 +357,22 @@ public class TransporteSa {
 
                     break;
 
-                case 3:
+                case 4:
                     System.out.println("Planificar viaje...");
                     // planificarViajeConsola(viajeService, choferService, vehiculoService);
                     break;
 
-                case 4:
+                case 5:
                     System.out.println("Mostrar viajes programados detalladamente...");
                     viajeService.mostrarViajesProgramadosDetallados();
                     break;
 
-                case 5:
+                case 6:
                     System.out.println("Mostrar viajes por colectivo...");
                     // mostrarViajesPorColectivo(viajeService);
                     break;
 
-                case 6:
+                case 7:
                     System.out.println("Informe de cantidad de viajes por chofer...");
                     HashMap<Chofer, Integer> cantidad = informe.cantidadViajesChofer(choferService.listaChoferes());
                     informe.mostrarInformeCantidadViajes(cantidad);
@@ -361,6 +412,12 @@ public class TransporteSa {
         System.out.println("        LISTADO DE VEHICULOS AGREGADOS CORRECTAMENTE");
         System.out.println("----------------------------------------------------------------------");
         vehiculoService.mostrarVehiculos();
+        
+        //TEST DE PRUEBA CIUDADES AGREGADAS CORRECTAMENTE
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("        LISTADO DE CIUDADES AGREGADOS CORRECTAMENTE");
+        System.out.println("----------------------------------------------------------------------");
+        ciudadService.mostraCiudades();
 
     }
 }
