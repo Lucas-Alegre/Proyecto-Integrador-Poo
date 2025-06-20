@@ -289,41 +289,37 @@ public class TransporteSa {
                             boolean tieneBodega = false;
                             boolean tieneAireAcondicionado = false;
 
-                            System.out.print("¿El Vehiculo es Colectivo? (s/n): ");
-                            String colectivo = scanner.nextLine().trim().toLowerCase();
+                            System.out.print("Seleccione 1 si es Colectivo o 2 si es Minibus: ");
+                            Integer tipo = scanner.nextInt();
+                            scanner.nextLine(); // Limpia el salto de línea pendiente
 
-                            if (colectivo.equals("s")) {
+                            if (tipo == 1) {
                                 tipoDeVehiculo = "colectivo";
 
-                                System.out.print("Tiene Piso doble? (s/n): ");
+                                System.out.print("¿Tiene Piso doble? (s/n): ");
                                 String tienePisoDoble = scanner.nextLine().trim().toLowerCase();
 
                                 if (tienePisoDoble.equals("s")) {
                                     vehiculoConPisoDoble = true;
                                 }
-                            } else {
 
-                                System.out.print("¿El Vehiculo es Minibus? (s/n): ");
-                                String minibus = scanner.nextLine().trim().toLowerCase();
-                                if (minibus.equals("s")) {
-                                    tipoDeVehiculo = "minibus";
+                            } else if (tipo == 2) {
+                                tipoDeVehiculo = "minibus";
 
-                                    System.out.print("Tiene Bodega? (s/n): ");
-                                    String tieneUnaBodega = scanner.nextLine().trim().toLowerCase();
-
-                                    if (tieneUnaBodega.equals("s")) {
-                                        tieneBodega = true;
-                                    }
-
-                                    System.out.print("Tiene Aire Acondicionado? (s/n): ");
-                                    String tieneUnAireAcondicionado = scanner.nextLine().trim().toLowerCase();
-
-                                    if (tieneUnAireAcondicionado.equals("s")) {
-                                        tieneAireAcondicionado = true;
-                                    }
-                                } else {
-                                    throw new NotTipoDeVehiculoDisponibleException("Error: No tenes un Vehiculo para ser Registrado. Necesitas un (Colectivo o Minibus)");
+                                System.out.print("¿Tiene Bodega? (s/n): ");
+                                String tieneUnaBodega = scanner.nextLine().trim().toLowerCase();
+                                if (tieneUnaBodega.equals("s")) {
+                                    tieneBodega = true;
                                 }
+
+                                System.out.print("¿Tiene Aire Acondicionado? (s/n): ");
+                                String tieneUnAireAcondicionado = scanner.nextLine().trim().toLowerCase();
+                                if (tieneUnAireAcondicionado.equals("s")) {
+                                    tieneAireAcondicionado = true;
+                                }
+
+                            } else {
+                                throw new NotTipoDeVehiculoDisponibleException("Error: No hay un tipo de vehículo válido. Debe ser Colectivo o Minibus.");
                             }
 
                             //Primero se crea el Vehiculo.
@@ -401,7 +397,7 @@ public class TransporteSa {
 
                             Vehiculo vehiculoToViaje = vehiculoService.vehiculoPorPatente(patenteDeVehiculo);
 
-                            viajeService.planificarViaje(fechaDeSalida,horarioDeSalida, fechaDeLlegada, horarioDeLlegada, ciudadDeOrigen, ciudadDeDestino, chofer, vehiculoToViaje);
+                            viajeService.planificarViaje(fechaDeSalida, horarioDeSalida, fechaDeLlegada, horarioDeLlegada, ciudadDeOrigen, ciudadDeDestino, chofer, vehiculoToViaje);
 
                             viajeExitoso = true;
 
