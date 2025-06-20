@@ -134,7 +134,7 @@ public class TransporteSa {
             switch (opcion) {
                 case 1:
                 System.out.println("Registrar chofer manualmente");
-                //boolean registroExitoso = false;
+                boolean registroExitoso = false; // Ver si toda esta logica se la puede sacar hacia una funcion, y tener un Min mas ordenado
                     String continuar;
                     do {
                         try {
@@ -167,7 +167,7 @@ public class TransporteSa {
                                 String fechaVto = scanner.nextLine();
                                 ChoferCategoria choferCategoria = new ChoferCategoria(fechaVto, chofer, categoriaMicrobus);
                                 listaCategorias.add(choferCategoria);
-                                //registroExitoso=true;
+                                registroExitoso=true;
                             }
 
                             //Preguntar si tiene categoría COLECTIVO
@@ -179,7 +179,7 @@ public class TransporteSa {
                                 String fechaVto = scanner.nextLine();
                                 ChoferCategoria choferCategoria = new ChoferCategoria(fechaVto, chofer, categoriaColectivo);
                                 listaCategorias.add(choferCategoria);
-                                //registroExitoso=true;
+                                registroExitoso=true;
                             }
 
                             //Validación: debe tener al menos una categoría // agregar una nueva excepcion
@@ -198,11 +198,16 @@ public class TransporteSa {
                             
                         } catch (ChoferSinCategorias e) {
                             System.out.println(e.getMessage());
-                            scanner.nextLine(); // limpiar buffer
+                            //scanner.nextLine(); // limpiar buffer
                         }
-
-                        System.out.print("¿Desea ingresar otro chofer? (s/n): ");
+                        if(registroExitoso){
+                            System.out.print("¿Desea ingresar otro chofer? (s/n): ");
                         continuar = scanner.nextLine().trim().toLowerCase();
+                        }else{
+                            System.out.print("No lograste Carcar un Chofer, ¿Deseas intentarlo nuevamente e ingresar otro chofer? (s/n): ");
+                            continuar = scanner.nextLine().trim().toLowerCase();
+                            
+                        }
 
                     } while (continuar.equals("s"));
 
