@@ -401,7 +401,7 @@ public class TransporteSa {
 
                             Vehiculo vehiculoToViaje = vehiculoService.vehiculoPorPatente(patenteDeVehiculo);
 
-                            viajeService.planificarViaje(fechaDeSalida, horarioDeSalida, fechaDeLlegada, horarioDeLlegada, precioDeViaje, distanciaDeViaje, costoDeViaje, ciudadDeOrigen, ciudadDeDestino, chofer, vehiculoToViaje);
+                            viajeService.planificarViaje(fechaDeSalida,horarioDeSalida, fechaDeLlegada, horarioDeLlegada, ciudadDeOrigen, ciudadDeDestino, chofer, vehiculoToViaje);
 
                             viajeExitoso = true;
 

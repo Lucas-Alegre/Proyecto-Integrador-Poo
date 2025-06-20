@@ -23,7 +23,7 @@ public class Viaje {
     private Vehiculo vehiculo;
     private Chofer chofer;
 
-    public Viaje(String fechaDeSalida, String fechaDeLlegada, String horarioSalida, String horarioLlegada, double precioPorPasajero, double distanciaEnKilometro, double costoPorKilometro, EstadoDeViajeEnum estadoDeViaje, Ciudad ciudadOrigen, Ciudad ciudadDestino, Vehiculo vehiculo, Chofer chofer) {
+    public Viaje(String fechaDeSalida, String fechaDeLlegada, String horarioSalida, String horarioLlegada, EstadoDeViajeEnum estadoDeViaje, Ciudad ciudadOrigen, Ciudad ciudadDestino, Vehiculo vehiculo, Chofer chofer) {
         this.fechaDeSalida = fechaDeSalida;
         this.fechaDeLlegada = fechaDeLlegada;
         this.horarioSalida = horarioSalida;
@@ -35,7 +35,7 @@ public class Viaje {
         this.chofer = chofer;
     }
 
-    public String getFechaDeSalida() {
+     public String getFechaDeSalida() {
         return fechaDeSalida;
     }
 

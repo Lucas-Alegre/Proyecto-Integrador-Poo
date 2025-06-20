@@ -19,13 +19,12 @@ public class ViajeService {
     public ViajeService() {
         listaViajes = new ArrayList<>();
     }
-    
+
     //2. Planificar un viaje entre dos ciudades
     public Viaje planificarViaje(String fechaDeSalida, String horarioSalida,
-                                String fechaDeLlegada, String horarioLlegada,
-                                double precio, double distancia, double costo,
-                                Ciudad origen, Ciudad destino,
-                                Chofer chofer, Vehiculo vehiculo)
+            String fechaDeLlegada, String horarioLlegada,
+            Ciudad origen, Ciudad destino,
+            Chofer chofer, Vehiculo vehiculo)
             throws CiudadesIgualesExcepcion, ChoferOcupadoExcepcion, VehiculoNoDisponibleExcepcion, ICategoriaInvalidaException {
 
         if (origen.equals(destino)) {
@@ -80,8 +79,8 @@ public class ViajeService {
 
         // Crear y asignar el nuevo viaje
         Viaje nuevoviaje = new Viaje(fechaDeSalida, fechaDeLlegada, horarioSalida, horarioLlegada,
-                                    precio, distancia, costo, EstadoDeViajeEnum.PROGRAMADO,
-                                    origen, destino, vehiculo, chofer);
+                EstadoDeViajeEnum.PROGRAMADO,
+                origen, destino, vehiculo, chofer);
 
         listaViajes.add(nuevoviaje);
         chofer.getViajeLista().add(nuevoviaje);
@@ -90,7 +89,6 @@ public class ViajeService {
         System.out.println("Viaje planificado correctamente: " + nuevoviaje);
         return nuevoviaje;
     }
-
 
     //4. Mostrar los viajes programados con informacion detallada
     public void mostrarViajesProgramadosDetallados() {
@@ -103,12 +101,12 @@ public class ViajeService {
                 System.out.println("Desde: " + viaje.getCiudadOrigen().getNombre());
                 System.out.println("Hasta: " + viaje.getCiudadDestino().getNombre());
                 System.out.println("Chofer: " + viaje.getChofer().getNombre() + " " + viaje.getChofer().getApellido());
-                System.out.println("Vehículo: Patente " + viaje.getVehiculo().getPatente()); 
+                System.out.println("Vehículo: Patente " + viaje.getVehiculo().getPatente());
                 System.out.println("Estado: " + viaje.getEstadoDeViaje());
             }
         }
     }
-    
+
     //5. Informe detallado de viajes que tiene que realizar un colectivo
     public void mostrarViajesPorColectivoDetallado(Colectivo colectivo) {
         System.out.println("Patente: " + colectivo.getPatente());
