@@ -40,7 +40,8 @@ public class ViajeService {
             LocalDateTime salida = LocalDateTime.parse(v.getFechaDeSalida() + " " + v.getHorarioSalida(), formatter);
             LocalDateTime llegada = LocalDateTime.parse(v.getFechaDeLlegada() + " " + v.getHorarioLlegada(), formatter);
 
-            if (nuevaSalida.isBefore(llegada) && nuevaLlegada.isAfter(salida)) {
+            boolean seSuperpone = nuevaSalida.isBefore(llegada) && nuevaLlegada.isAfter(salida);
+            if (seSuperpone) {
                 throw new ChoferOcupadoExcepcion("El chofer ya tiene un viaje que se superpone.");
             }
         }
