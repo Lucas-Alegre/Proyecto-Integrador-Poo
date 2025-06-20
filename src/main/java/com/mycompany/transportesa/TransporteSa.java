@@ -46,25 +46,25 @@ public class TransporteSa {
         Chofer chofer4 = new Chofer(22222222, "Ana", "López", "LIC002", new ArrayList<>(), new ArrayList<>());
         Chofer chofer5 = new Chofer(33333333, "Diego", "Ruiz", "LIC003", new ArrayList<>(), new ArrayList<>());
         Chofer chofer6 = new Chofer(44444444, "Laura", "Fernández", "LIC004", new ArrayList<>(), new ArrayList<>());
-        Chofer chofer7 = new Chofer(55555555, "Jorge", "Sánchez", "LIC005", new ArrayList<>(), new ArrayList<>());
+        Chofer chofer7 = new Chofer(34834834, "Jorge", "Sánchez", "LIC005", new ArrayList<>(), new ArrayList<>());
         Chofer chofer8 = new Chofer(66666666, "Sofía", "Ramírez", "LIC006", new ArrayList<>(), new ArrayList<>());
         Chofer chofer9 = new Chofer(77777777, "Tomás", "García", "LIC007", new ArrayList<>(), new ArrayList<>());
         Chofer chofer10 = new Chofer(88888888, "Lucía", "Morales", "LIC008", new ArrayList<>(), new ArrayList<>());
 
-        /*try {
-            //choferService.registrarChofer(chofer1);
-            //choferService.registrarChofer(chofer2);
+        try {
+            choferService.registrarChofer(chofer1);
+            choferService.registrarChofer(chofer2);
             choferService.registrarChofer(chofer3);
             choferService.registrarChofer(chofer4);
             choferService.registrarChofer(chofer5);
             choferService.registrarChofer(chofer6);
-            choferService.registrarChofer(chofer7);
+            /*choferService.registrarChofer(chofer7);
             choferService.registrarChofer(chofer8);
             choferService.registrarChofer(chofer9);
-            choferService.registrarChofer(chofer10);
+            choferService.registrarChofer(chofer10);*/
         } catch (ChoferYaRegistradoExcepcion e) {
             System.out.println("Error al registrar chofer: " + e.getMessage());
-        }*/
+        }
         // Crear colectivos
         Colectivo col1 = new Colectivo("AAA111", 60, new ArrayList<>(), true);
         Colectivo col2 = new Colectivo("BBB222", 20, new ArrayList<>(), false);
@@ -74,12 +74,12 @@ public class TransporteSa {
 
         // Crear minibuses
         Minibus minibus1 = new Minibus("ABA212", 10, new ArrayList<>(), true, true); // si anda mal rompe acàs no sigue abajo y va al swirch
-        Minibus minibus2 = new Minibus("XCD242",20, new ArrayList<>(), false, true);
+        Minibus minibus2 = new Minibus("XCD242", 20, new ArrayList<>(), false, true);
         Minibus minibus3 = new Minibus("LAM864", 20, new ArrayList<>(), true, false);
         Minibus minibus4 = new Minibus("PQY936", 10, new ArrayList<>(), false, false);
         Minibus minibus5 = new Minibus("PLAE23", 15, new ArrayList<>(), true, true);
 
-        /*try {
+        try {
             vehiculoService.registrarVehiculo(col1);
             vehiculoService.registrarVehiculo(col2);
             vehiculoService.registrarVehiculo(col3);
@@ -93,7 +93,7 @@ public class TransporteSa {
             vehiculoService.registrarVehiculo(minibus5);
         } catch (VehiculoYaRegistradoExcepcion e) {
             System.out.println("Error al registrar vehículo: " + e.getMessage());
-        }*/
+        }
         // Crear ciudades (una por provincia)
         Ciudad ciudad1 = new Ciudad("La Plata", ProvinciaEnum.BUENOS_AIRES, "1");
         Ciudad ciudad2 = new Ciudad("Resistencia", ProvinciaEnum.CHACO, "2");
@@ -103,8 +103,17 @@ public class TransporteSa {
         Ciudad ciudad6 = new Ciudad("Posadas", ProvinciaEnum.MISIONES, "6");
         Ciudad ciudad7 = new Ciudad("Salta", ProvinciaEnum.SALTA, "7");
         Ciudad ciudad8 = new Ciudad("Ushuaia", ProvinciaEnum.TIERRA_DEL_FUEGO, "8");
-        Ciudad ciudad9 = new Ciudad("Santa Rosa", ProvinciaEnum.LA_PAMPA, "9");
-        Ciudad ciudad10 = new Ciudad("Paraná", ProvinciaEnum.ENTRE_RIOS, "10");
+        Ciudad ciudad9 = new Ciudad("concordia", ProvinciaEnum.ENTRE_RIOS, "3200");
+        Ciudad ciudad10 = new Ciudad("Parana", ProvinciaEnum.ENTRE_RIOS, "4200");
+        
+       ciudadService.addCiudad(ciudad1);
+       ciudadService.addCiudad(ciudad2);
+       ciudadService.addCiudad(ciudad3);
+       ciudadService.addCiudad(ciudad4);
+       ciudadService.addCiudad(ciudad5);
+       ciudadService.addCiudad(ciudad9);
+       ciudadService.addCiudad(ciudad10);
+       
 
         // Menú interactivo
         int opcion;
@@ -316,11 +325,11 @@ public class TransporteSa {
 
                             //Primero se crea el Vehiculo.
                             if (tipoDeVehiculo.equals("colectivo")) {
-                                Vehiculo vehiculoColectivo = new Colectivo(patente,capacidad, viajes, vehiculoConPisoDoble);
+                                Vehiculo vehiculoColectivo = new Colectivo(patente, capacidad, viajes, vehiculoConPisoDoble);
                                 vehiculoService.registrarVehiculo(vehiculoColectivo);
                                 VehiculosExitoso = true;
                             } else {
-                                Vehiculo vehiculoMinibus = new Minibus(patente,capacidad, viajes, tieneBodega, tieneAireAcondicionado);
+                                Vehiculo vehiculoMinibus = new Minibus(patente, capacidad, viajes, tieneBodega, tieneAireAcondicionado);
                                 vehiculoService.registrarVehiculo(vehiculoMinibus);
                                 VehiculosExitoso = true;
                             }
@@ -421,8 +430,38 @@ public class TransporteSa {
                     break;
 
                 case 6:
-                    System.out.println("Mostrar viajes por colectivo...");
-                    // mostrarViajesPorColectivo(viajeService);
+                    boolean vehiculoToConsultaExitoso = false;
+                    String continuarConsultaViaje = "";
+
+                    System.out.println("Listado de colectivo...");
+                    do {
+
+                        vehiculoService.mostrarVehiculosColectivos();
+                        System.out.print("Ingresa una patente para consultar un viaje detallado: ");
+                        String patenteVehiculoDetallado = scanner.nextLine();
+
+                        Vehiculo vehiculoParaConsultar = vehiculoService.vehiculoPorPatente(patenteVehiculoDetallado);
+
+                        if (vehiculoParaConsultar != null) {
+                            vehiculoToConsultaExitoso = true;
+                        } else {
+                            System.out.println("Vehiculo No encontrado");
+                        }
+
+                        if (vehiculoParaConsultar instanceof Colectivo) {
+                            Colectivo colectivo = (Colectivo) vehiculoParaConsultar;
+                            viajeService.mostrarViajesPorColectivoDetallado(colectivo);
+                        } else {
+                            System.out.println("La patente ingresada no corresponde a un colectivo.");
+                        }
+                        if (vehiculoToConsultaExitoso) {
+                            System.out.print("¿Desea Consultar otro Colectivo? (s/n): ");
+                            continuarConsultaViaje = scanner.nextLine().trim().toLowerCase();
+                        } else {
+                            System.out.print("No lograste consultar los Viajes de vehiculo, ¿Deseas intentarlo nuevamente e ingresar otra consulta? (s/n): ");
+                            continuarConsultaViaje = scanner.nextLine().trim().toLowerCase();
+                        }
+                    } while (continuarConsultaViaje.equals("s"));
                     break;
 
                 case 7:
