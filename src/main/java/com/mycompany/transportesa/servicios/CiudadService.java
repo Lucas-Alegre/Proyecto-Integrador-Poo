@@ -36,12 +36,20 @@ public class CiudadService {
     }
 
     public Ciudad getCiudadSegunPostal(String codigoPostal) {
+        Ciudad ciudad = null;
         for (Ciudad c : listaCiudad) {
             if (c.getCodigoPostal().equals(codigoPostal)) {
-                return c;
+                ciudad = c;
             }
         }
-        return null;
+        return ciudad;
     }
+    
+    public void getCiudadesToViaje(){
+        for (Ciudad c : listaCiudad) {
+            c.mostrarAlUsuario();
+        }
+    }
+    
 
 }

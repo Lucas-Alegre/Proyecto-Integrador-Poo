@@ -11,7 +11,9 @@ import com.mycompany.transportesa.excepciones.CiudadesIgualesExcepcion;
 import com.mycompany.transportesa.excepciones.VehiculoYaRegistradoExcepcion;
 import com.mycompany.transportesa.excepciones.ChoferYaRegistradoExcepcion;
 import com.mycompany.transportesa.excepciones.ExcesoDePasajerosException;
+import com.mycompany.transportesa.excepciones.ICategoriaInvalidaException;
 import com.mycompany.transportesa.excepciones.NotTipoDeVehiculoDisponibleException;
+import com.mycompany.transportesa.excepciones.VehiculoNoDisponibleExcepcion;
 
 import com.mycompany.transportesa.servicios.*;
 import java.util.ArrayList;
@@ -65,18 +67,18 @@ public class TransporteSa {
         }*/
 
         // Crear colectivos
-        Colectivo col1 = new Colectivo("AAA111", 50, 2020, 150000, new ArrayList<>(), true);
-        Colectivo col2 = new Colectivo("BBB222", 55, 2019, 140000, new ArrayList<>(), false);
-        Colectivo col3 = new Colectivo("CCC333", 60, 2021, 160000, new ArrayList<>(), true);
-        Colectivo col4 = new Colectivo("DDD444", 75, 2022, 170000, new ArrayList<>(), false);
-        Colectivo col5 = new Colectivo("EEE555", 40, 2018, 130000, new ArrayList<>(), true);
+        Colectivo col1 = new Colectivo("AAA111",  2020, 150000, new ArrayList<>(), true);
+        Colectivo col2 = new Colectivo("BBB222", 2019, 140000, new ArrayList<>(), false);
+        Colectivo col3 = new Colectivo("CCC333", 2021, 160000, new ArrayList<>(), true);
+        Colectivo col4 = new Colectivo("DDD444", 2022, 170000, new ArrayList<>(), false);
+        Colectivo col5 = new Colectivo("EEE555",  2018, 130000, new ArrayList<>(), true);
 
         // Crear minibuses
-        Minibus minibus1 = new Minibus("ABA212", 10, 2010, 450000, new ArrayList<>(), true, true); // si anda mal rompe acàs no sigue abajo y va al swirch
-        Minibus minibus2 = new Minibus("XCD242", 15, 2011, 350000, new ArrayList<>(), false, true);
-        Minibus minibus3 = new Minibus("LAM864", 20, 2012, 430000, new ArrayList<>(), true, false);
-        Minibus minibus4 = new Minibus("PQY936", 25, 2014, 290000, new ArrayList<>(), false, false);
-        Minibus minibus5 = new Minibus("PLAE23", 30, 2016, 310000, new ArrayList<>(), true, true);
+        Minibus minibus1 = new Minibus("ABA212", 2010, 450000, new ArrayList<>(), true, true); // si anda mal rompe acàs no sigue abajo y va al swirch
+        Minibus minibus2 = new Minibus("XCD242", 2011, 350000, new ArrayList<>(), false, true);
+        Minibus minibus3 = new Minibus("LAM864",  2012, 430000, new ArrayList<>(), true, false);
+        Minibus minibus4 = new Minibus("PQY936", 2014, 290000, new ArrayList<>(), false, false);
+        Minibus minibus5 = new Minibus("PLAE23",  2016, 310000, new ArrayList<>(), true, true);
 
         /*try {
             vehiculoService.registrarVehiculo(col1);
@@ -331,11 +333,11 @@ public class TransporteSa {
 
                             //Primero se crea el Vehiculo.
                             if (tipoDeVehiculo.equals("colectivo")) {
-                                Vehiculo vehiculoColectivo = new Colectivo(patente, capacidad, anioFabricacion, kilometraje, viajes, vehiculoConPisoDoble);
+                                Vehiculo vehiculoColectivo = new Colectivo(patente,anioFabricacion, kilometraje, viajes, vehiculoConPisoDoble);
                                 vehiculoService.registrarVehiculo(vehiculoColectivo);
                                 VehiculosExitoso = true;
                             } else {
-                                Vehiculo vehiculoMinibus = new Minibus(patente, capacidad, anioFabricacion, kilometraje, viajes, tieneBodega, tieneAireAcondicionado);
+                                Vehiculo vehiculoMinibus = new Minibus(patente, anioFabricacion, kilometraje, viajes, tieneBodega, tieneAireAcondicionado);
                                 vehiculoService.registrarVehiculo(vehiculoMinibus);
                                 VehiculosExitoso = true;
                             }
@@ -358,8 +360,93 @@ public class TransporteSa {
                     break;
 
                 case 4:
-                    System.out.println("Planificar viaje...");
-                    // planificarViajeConsola(viajeService, choferService, vehiculoService);
+                    System.out.println("Planificar viaje Manualmente...");
+                    boolean viajeExitoso = false;
+                    String continuarRegistrarViaje;
+                    do {
+                        try {
+                            System.out.print("Fecha de Salida del viaje: ");
+                            String fechaDeSalida = scanner.nextLine();
+
+                            System.out.print("Horario de salida: ");
+                            String horarioDeSalida = scanner.nextLine();
+
+                             System.out.print("Fecha de Llegada del viaje: ");
+                            String fechaDeLlegada = scanner.nextLine();
+
+                            System.out.print("Horario de llegada: ");
+                            String horarioDeLlegada = scanner.nextLine();
+                            
+                             System.out.print("Precio: ");
+                            double precioDeViaje = scanner.nextDouble();
+                            scanner.nextLine();
+                            
+                             System.out.print("Distancia: ");
+                            double distanciaDeViaje = scanner.nextDouble();
+                            scanner.nextLine();
+                            
+                             System.out.print("Costo: ");
+                            double costoDeViaje = scanner.nextDouble();
+                            scanner.nextLine();
+                            
+                            ciudadService.getCiudadesToViaje();
+                            System.out.print("Codigo postal de la Ciudad-Origen: ");
+                            String ciudadOrigen = scanner.nextLine();
+                            System.out.print("Codigo postal de la Ciudad-Destino: ");
+                            String ciudadDestino = scanner.nextLine();
+                            
+                            choferService.mostrarChoferesToViaje();
+                            System.out.print("Dni del chofer para asignarlo al viaje");
+                            Long dniChofer = scanner.nextLong();
+                            scanner.nextLine();
+                            
+                            System.out.print("Queres Asignar un Vehiculo de tipo (colectivo | minibus ?");
+                            String vehiculoSeleccionado = scanner.nextLine().trim().toLowerCase();
+                            String patenteDeVehiculo="";
+                            if(vehiculoSeleccionado.equalsIgnoreCase("colectivo")){
+                                vehiculoService.mostrarVehiculosColectivos();
+                                System.out.print("Patente del colectivo para asignarlo al viaje: ");
+                                patenteDeVehiculo = scanner.nextLine();
+                                
+                            }else if(vehiculoSeleccionado.equalsIgnoreCase("minibus")){
+                                vehiculoService.mostrarVehiculosMinibus();
+                                System.out.print("Patente del Minibus para asignarlo al viaje: ");
+                                patenteDeVehiculo = scanner.nextLine();
+                            }
+                            
+                            Ciudad ciudadDeOrigen = ciudadService.getCiudadSegunPostal(ciudadOrigen);
+                            Ciudad ciudadDeDestino = ciudadService.getCiudadSegunPostal(ciudadDestino);
+                            
+                            Chofer chofer=choferService.choferPorDni(dniChofer);
+                            
+                            Vehiculo vehiculoToViaje = vehiculoService.vehiculoPorPatente(patenteDeVehiculo);
+                            
+                            
+                            viajeService.planificarViaje(fechaDeSalida, horarioDeSalida, fechaDeLlegada, horarioDeLlegada,precioDeViaje,distanciaDeViaje, costoDeViaje, ciudadDeOrigen, ciudadDeDestino, chofer, vehiculoToViaje);
+                            
+                            
+                            viajeExitoso = true;
+                        
+                        } catch (CiudadesIgualesExcepcion e) {
+                            System.out.println("Error: " + e.getMessage());
+                        } catch (ChoferOcupadoExcepcion e) {
+                            System.out.println("Error: " + e.getMessage());
+                        } catch (VehiculoNoDisponibleExcepcion e) {
+                            System.out.println("Error: " + e.getMessage());
+                        } catch (ICategoriaInvalidaException e) {
+                            System.out.println("Error: " + e.getMessage());
+                        } 
+                        
+                        if (viajeExitoso) {
+                            System.out.print("¿Desea Crear otro Viaje? (s/n): ");
+                            continuarRegistrarViaje = scanner.nextLine().trim().toLowerCase();
+                        } else {
+                            System.out.print("No lograste Registrar una Viaje, ¿Deseas intentarlo nuevamente e ingresar otro Viaje? (s/n): ");
+                            continuarRegistrarViaje = scanner.nextLine().trim().toLowerCase();
+                        }
+
+                    } while (continuarRegistrarViaje.equals("s"));
+
                     break;
 
                 case 5:
@@ -392,14 +479,11 @@ public class TransporteSa {
 
         scanner.close();
 
-        Colectivo colectivo1 = new Colectivo("AAA111", 45, 2018, 150000.5, new ArrayList<>(), true);
-        Colectivo colectivo2 = new Colectivo("BBB222", 30, 2020, 90000, new ArrayList<>(), false);
-
         //TEST DE PRUEBA DE IMPLEMENTACION DE QUE NO SUPERPONGAN VIAJES A UN MISMO CHOFER Y UN CHOFER DEBA DESCANSAR AL MENOS 8 HORAS
         System.out.println("----------------------------------------------------------------------");
         System.out.println("        Informe de viajes a realizar de un colectivo determinado");
         System.out.println("----------------------------------------------------------------------");
-        viajeService.mostrarViajesPorColectivoDetallado(colectivo1);
+        viajeService.mostrarViajesPorColectivoDetallado(col1);
 
         //TEST DE PRUEBA CHOFERES AGREGADOS CORRECTAMENTE
         System.out.println("----------------------------------------------------------------------");

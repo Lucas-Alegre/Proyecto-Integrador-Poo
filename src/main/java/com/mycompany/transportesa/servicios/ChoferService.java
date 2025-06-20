@@ -44,4 +44,21 @@ public class ChoferService {
         }
     }
 
+    public void mostrarChoferesToViaje() {
+        System.out.println("Lista de choferes:");
+        for (Chofer c : choferList) {
+            System.out.println(c.getChoferToUser());
+        }
+    }
+
+    public Chofer choferPorDni(Long dni) {
+        Chofer choferEncontrado = null;
+        for (Chofer c : choferList) {
+            if (c.getDni() == dni) {
+                choferEncontrado = c;
+            }
+        }
+        return choferEncontrado;
+    }
+
 }

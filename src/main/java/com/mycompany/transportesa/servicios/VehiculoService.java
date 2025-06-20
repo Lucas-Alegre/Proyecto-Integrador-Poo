@@ -4,6 +4,8 @@
  */
 package com.mycompany.transportesa.servicios;
 
+import com.mycompany.transportesa.entidades.Colectivo;
+import com.mycompany.transportesa.entidades.Minibus;
 import com.mycompany.transportesa.entidades.Vehiculo;
 import com.mycompany.transportesa.excepciones.VehiculoYaRegistradoExcepcion;
 import java.util.ArrayList;
@@ -37,5 +39,33 @@ public class VehiculoService {
         for (Vehiculo v : vehiculoList) {
             System.out.println(v);
         }
+    }
+
+    public void mostrarVehiculosColectivos() {
+        System.out.println("Lista de Colectivos:");
+        for (Vehiculo v : vehiculoList) {
+            if (v instanceof Colectivo) {
+                System.out.println(((Colectivo) v).getColectivoToUser());
+            }
+        }
+    }
+
+    public void mostrarVehiculosMinibus() {
+        System.out.println("Lista de Colectivos:");
+        for (Vehiculo v : vehiculoList) {
+            if (v instanceof Minibus) {
+                System.out.println(((Minibus) v).getMinibusToUser());
+            }
+        }
+    }
+
+    public Vehiculo vehiculoPorPatente(String patente) {
+        Vehiculo vehiculoEncontrado = null;
+        for (Vehiculo v : vehiculoList) {
+            if (v.getPatente().equalsIgnoreCase(patente)) {
+                vehiculoEncontrado = v;
+            }
+        }
+        return vehiculoEncontrado;
     }
 }

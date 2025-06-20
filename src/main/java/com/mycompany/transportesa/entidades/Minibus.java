@@ -15,8 +15,8 @@ public class Minibus extends Vehiculo {
     private boolean tieneBodega;
     private boolean aireAcondicionado;
 
-    public Minibus(String patente, int capacidad, int anioFabricacion, double kilometraje, ArrayList<Viaje> viajeLista, boolean tieneBodega, boolean aireAcondicionado) {
-        super(patente, capacidad, anioFabricacion, kilometraje, viajeLista);
+    public Minibus(String patente, int anioFabricacion, double kilometraje, ArrayList<Viaje> viajeLista, boolean tieneBodega, boolean aireAcondicionado) {
+        super(patente, anioFabricacion, kilometraje, viajeLista);
         this.tieneBodega = tieneBodega;
         this.aireAcondicionado = aireAcondicionado;
     }
@@ -35,6 +35,10 @@ public class Minibus extends Vehiculo {
 
     public void setAireAcondicionado(boolean nuevoEstadoAireAcondicionado) {
         this.aireAcondicionado = nuevoEstadoAireAcondicionado;
+    }
+    
+    public String getMinibusToUser(){
+        return "Minibus [Patente: " + super.getPatente()+" ]";
     }
 
     @Override

@@ -18,7 +18,7 @@ public class Chofer extends Persona {
     private List<ChoferCategoria> categorias;
     private List<Viaje> viajeLista;
 
-    public Chofer(long dni, String nombre,String apellido, String nroLicencia,List<ChoferCategoria> categorias, List<Viaje> viajeLista) {
+    public Chofer(long dni, String nombre, String apellido, String nroLicencia, List<ChoferCategoria> categorias, List<Viaje> viajeLista) {
         super(dni, nombre, apellido);
         this.nroLicencia = nroLicencia;
         this.categorias = categorias;
@@ -55,22 +55,25 @@ public class Chofer extends Persona {
 
     //El chofer tiene viajes ese dia???
     public boolean estaDisponible(String fecha, String horaSalida, String horaLlegada) {
-           //Transformo todo los String a tipo LocalDateTime para tratar fecha y hora en su conjunto
-           //formatter es el nombre del formateador mucha imaginacion no tengo
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-            LocalDateTime nuevaSalida = LocalDateTime.parse(fecha + " " + horaSalida, formatter);
-            LocalDateTime nuevaLlegada = LocalDateTime.parse(fecha + " " + horaLlegada, formatter);
+        //Transformo todo los String a tipo LocalDateTime para tratar fecha y hora en su conjunto
+        //formatter es el nombre del formateador mucha imaginacion no tengo
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime nuevaSalida = LocalDateTime.parse(fecha + " " + horaSalida, formatter);
+        LocalDateTime nuevaLlegada = LocalDateTime.parse(fecha + " " + horaLlegada, formatter);
 
-            for (Viaje v : viajeLista) {
-                LocalDateTime salidaExistente = LocalDateTime.parse(v.getFechaDeSalida() + " " + v.getHorarioSalida(), formatter);
-                LocalDateTime llegadaExistente = LocalDateTime.parse(v.getFechaDeSalida() + " " + v.getHorarioLlegada(), formatter);
+        for (Viaje v : viajeLista) {
+            LocalDateTime salidaExistente = LocalDateTime.parse(v.getFechaDeSalida() + " " + v.getHorarioSalida(), formatter);
+            LocalDateTime llegadaExistente = LocalDateTime.parse(v.getFechaDeSalida() + " " + v.getHorarioLlegada(), formatter);
 
-                if(nuevaSalida.isBefore(llegadaExistente.plusHours(8))) {
-                    return false;
-                } else {
-                }
+            if (nuevaSalida.isBefore(llegadaExistente.plusHours(8))) {
+                return false;
+            } else {
             }
-            return true;
+        }
+        return true;
     }
 
+    public String getChoferToUser() {
+        return "[dni: " + super.getDni() + ", Nombre: " + super.getNombre() + ", Apellido: " + super.getApellido();
+    }
 }

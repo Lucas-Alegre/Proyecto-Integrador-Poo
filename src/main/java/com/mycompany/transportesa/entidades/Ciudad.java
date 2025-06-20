@@ -65,6 +65,9 @@ public class Ciudad {
     public void setDestinoLista(ArrayList<Viaje> DestinoLista) {
         this.DestinoLista = DestinoLista;
     }
+    public String mostrarAlUsuario(){
+        return "[Codigo=" + codigoPostal + ", ciudad=" + nombre + ", provincia=" + provincia +"]";
+    }
 
     @Override
     public String toString() {

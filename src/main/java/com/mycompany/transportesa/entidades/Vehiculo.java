@@ -13,14 +13,12 @@ import java.util.ArrayList;
 public abstract class Vehiculo {
 
     private String patente;
-    private int capacidad;
     private int anioFabricacion;
     private double kilometraje;
     private ArrayList<Viaje> viajeLista;
 
-    public Vehiculo(String patente, int capacidad, int anioFabricacion, double kilometraje, ArrayList<Viaje> viajeLista) {
+    public Vehiculo(String patente, int anioFabricacion, double kilometraje, ArrayList<Viaje> viajeLista) {
         this.patente = patente;
-        this.capacidad = capacidad;
         this.anioFabricacion = anioFabricacion;
         this.kilometraje = kilometraje;
         this.viajeLista = viajeLista;
@@ -32,14 +30,6 @@ public abstract class Vehiculo {
 
     public void setPatente(String patente) {
         this.patente = patente;
-    }
-
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
     }
 
     public int getAnioFabricacion() {
@@ -66,9 +56,10 @@ public abstract class Vehiculo {
         this.viajeLista = viajeLista;
     }
 
+
     @Override
     public String toString() {
-        return "Vehiculo{" + "patente=" + this.getPatente() + ", capacidad=" + this.getCapacidad() + ", anioFabricacion=" + this.getAnioFabricacion() + ", kilometraje=" + this.getKilometraje() + ", viajeLista=" + this.getViajeLista() + '}';
+        return "Vehiculo{" + "patente=" + this.getPatente() + ", anioFabricacion=" + this.getAnioFabricacion() + ", kilometraje=" + this.getKilometraje() + ", viajeLista=" + this.getViajeLista() + '}';
     }
 
 }
