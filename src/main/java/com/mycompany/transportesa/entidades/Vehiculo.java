@@ -40,7 +40,7 @@ public abstract class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo{" + "patente=" + patente + ", capacidad=" + capacidad + ", viajeLista=" + viajeLista + '}';
+        return "Vehiculo{" + "patente=" + patente + ", capacidad=" + capacidad + '}';
     }
 
 }
