@@ -65,20 +65,19 @@ public class TransporteSa {
         } catch (ChoferYaRegistradoExcepcion e) {
             System.out.println("Error al registrar chofer: " + e.getMessage());
         }*/
-
         // Crear colectivos
-        Colectivo col1 = new Colectivo("AAA111",  2020, 150000, new ArrayList<>(), true);
+        Colectivo col1 = new Colectivo("AAA111", 2020, 150000, new ArrayList<>(), true);
         Colectivo col2 = new Colectivo("BBB222", 2019, 140000, new ArrayList<>(), false);
         Colectivo col3 = new Colectivo("CCC333", 2021, 160000, new ArrayList<>(), true);
         Colectivo col4 = new Colectivo("DDD444", 2022, 170000, new ArrayList<>(), false);
-        Colectivo col5 = new Colectivo("EEE555",  2018, 130000, new ArrayList<>(), true);
+        Colectivo col5 = new Colectivo("EEE555", 2018, 130000, new ArrayList<>(), true);
 
         // Crear minibuses
         Minibus minibus1 = new Minibus("ABA212", 2010, 450000, new ArrayList<>(), true, true); // si anda mal rompe acàs no sigue abajo y va al swirch
         Minibus minibus2 = new Minibus("XCD242", 2011, 350000, new ArrayList<>(), false, true);
-        Minibus minibus3 = new Minibus("LAM864",  2012, 430000, new ArrayList<>(), true, false);
+        Minibus minibus3 = new Minibus("LAM864", 2012, 430000, new ArrayList<>(), true, false);
         Minibus minibus4 = new Minibus("PQY936", 2014, 290000, new ArrayList<>(), false, false);
-        Minibus minibus5 = new Minibus("PLAE23",  2016, 310000, new ArrayList<>(), true, true);
+        Minibus minibus5 = new Minibus("PLAE23", 2016, 310000, new ArrayList<>(), true, true);
 
         /*try {
             vehiculoService.registrarVehiculo(col1);
@@ -95,18 +94,17 @@ public class TransporteSa {
         } catch (VehiculoYaRegistradoExcepcion e) {
             System.out.println("Error al registrar vehículo: " + e.getMessage());
         }*/
-
         // Crear ciudades (una por provincia)
-        Ciudad ciudad1 = new Ciudad("La Plata", ProvinciaEnum.BUENOS_AIRES,"1");
-        Ciudad ciudad2 = new Ciudad("Resistencia", ProvinciaEnum.CHACO,"2");
-        Ciudad ciudad3 = new Ciudad("Córdoba", ProvinciaEnum.CORDOBA,"3");
-        Ciudad ciudad4 = new Ciudad("Rawson", ProvinciaEnum.CHUBUT,"4");
-        Ciudad ciudad5 = new Ciudad("Mendoza", ProvinciaEnum.MENDOZA,"5");
-        Ciudad ciudad6 = new Ciudad("Posadas", ProvinciaEnum.MISIONES,"6");
-        Ciudad ciudad7 = new Ciudad("Salta", ProvinciaEnum.SALTA,"7");
-        Ciudad ciudad8 = new Ciudad("Ushuaia", ProvinciaEnum.TIERRA_DEL_FUEGO,"8");
-        Ciudad ciudad9 = new Ciudad("Santa Rosa", ProvinciaEnum.LA_PAMPA,"9");
-        Ciudad ciudad10 = new Ciudad("Paraná", ProvinciaEnum.ENTRE_RIOS,"10");
+        Ciudad ciudad1 = new Ciudad("La Plata", ProvinciaEnum.BUENOS_AIRES, "1");
+        Ciudad ciudad2 = new Ciudad("Resistencia", ProvinciaEnum.CHACO, "2");
+        Ciudad ciudad3 = new Ciudad("Córdoba", ProvinciaEnum.CORDOBA, "3");
+        Ciudad ciudad4 = new Ciudad("Rawson", ProvinciaEnum.CHUBUT, "4");
+        Ciudad ciudad5 = new Ciudad("Mendoza", ProvinciaEnum.MENDOZA, "5");
+        Ciudad ciudad6 = new Ciudad("Posadas", ProvinciaEnum.MISIONES, "6");
+        Ciudad ciudad7 = new Ciudad("Salta", ProvinciaEnum.SALTA, "7");
+        Ciudad ciudad8 = new Ciudad("Ushuaia", ProvinciaEnum.TIERRA_DEL_FUEGO, "8");
+        Ciudad ciudad9 = new Ciudad("Santa Rosa", ProvinciaEnum.LA_PAMPA, "9");
+        Ciudad ciudad10 = new Ciudad("Paraná", ProvinciaEnum.ENTRE_RIOS, "10");
 
         // Menú interactivo
         int opcion;
@@ -149,30 +147,29 @@ public class TransporteSa {
 
                             System.out.print("Codigo Postal: ");
                             String codigoPostal = scanner.nextLine();
-                            
+
                             //logica para validad la provincia a un enum
-                            
                             String nombreProvinciaEnum = provincia.toUpperCase().replace(" ", "_");
                             ProvinciaEnum provinciaConvertida = ProvinciaEnum.valueOf(nombreProvinciaEnum);
-                            
-                            for(Ciudad c : ciudadService.getListadoCiudades()){
-                                if(c.getCodigoPostal().equalsIgnoreCase(codigoPostal)){ 
+
+                            for (Ciudad c : ciudadService.getListadoCiudades()) {
+                                if (c.getCodigoPostal().equalsIgnoreCase(codigoPostal)) {
                                     throw new CiudadesIgualesExcepcion("Esta Ciudad ya Existe con este codigo Postal.");
                                 }
-                                if(c.getNombre().equalsIgnoreCase(nombreCiudad)&&c.getProvincia()==provinciaConvertida){
+                                if (c.getNombre().equalsIgnoreCase(nombreCiudad) && c.getProvincia() == provinciaConvertida) {
                                     throw new CiudadesIgualesExcepcion("Esta Ciudad ya Existe en esta provincia");
                                 }
                             }
-                            
-                            Ciudad ciudadToRegistrar = new Ciudad(nombreCiudad,provinciaConvertida, codigoPostal);
-                            
+
+                            Ciudad ciudadToRegistrar = new Ciudad(nombreCiudad, provinciaConvertida, codigoPostal);
+
                             ciudadService.addCiudad(ciudadToRegistrar);;
                             CiudadExitoso = true;
-                        
+
                         } catch (CiudadesIgualesExcepcion e) {
                             System.out.println("Error: " + e.getMessage());
-                        } 
-                        
+                        }
+
                         if (CiudadExitoso) {
                             System.out.print("¿Desea ingresar otra Ciudad? (s/n): ");
                             continuarRegistrRegistroCiudad = scanner.nextLine().trim().toLowerCase();
@@ -291,10 +288,10 @@ public class TransporteSa {
                             boolean vehiculoConPisoDoble = false;
                             boolean tieneBodega = false;
                             boolean tieneAireAcondicionado = false;
-                            
+
                             System.out.print("¿El Vehiculo es Colectivo? (s/n): ");
                             String colectivo = scanner.nextLine().trim().toLowerCase();
-                            
+
                             if (colectivo.equals("s")) {
                                 tipoDeVehiculo = "colectivo";
 
@@ -304,8 +301,8 @@ public class TransporteSa {
                                 if (tienePisoDoble.equals("s")) {
                                     vehiculoConPisoDoble = true;
                                 }
-                            }else{
-                               
+                            } else {
+
                                 System.out.print("¿El Vehiculo es Minibus? (s/n): ");
                                 String minibus = scanner.nextLine().trim().toLowerCase();
                                 if (minibus.equals("s")) {
@@ -324,16 +321,14 @@ public class TransporteSa {
                                     if (tieneUnAireAcondicionado.equals("s")) {
                                         tieneAireAcondicionado = true;
                                     }
-                                }else{
+                                } else {
                                     throw new NotTipoDeVehiculoDisponibleException("Error: No tenes un Vehiculo para ser Registrado. Necesitas un (Colectivo o Minibus)");
                                 }
                             }
 
-                            
-
                             //Primero se crea el Vehiculo.
                             if (tipoDeVehiculo.equals("colectivo")) {
-                                Vehiculo vehiculoColectivo = new Colectivo(patente,anioFabricacion, kilometraje, viajes, vehiculoConPisoDoble);
+                                Vehiculo vehiculoColectivo = new Colectivo(patente, anioFabricacion, kilometraje, viajes, vehiculoConPisoDoble);
                                 vehiculoService.registrarVehiculo(vehiculoColectivo);
                                 VehiculosExitoso = true;
                             } else {
@@ -346,7 +341,7 @@ public class TransporteSa {
                         } catch (NotTipoDeVehiculoDisponibleException e) {
                             System.out.println(e.getMessage());
                         }
-                        
+
                         if (VehiculosExitoso) {
                             System.out.print("¿Desea ingresar otro Vehiculo? (s/n): ");
                             continuarRegistrRegistroVehiculo = scanner.nextLine().trim().toLowerCase();
@@ -367,66 +362,49 @@ public class TransporteSa {
                         try {
                             System.out.print("Fecha de Salida del viaje: ");
                             String fechaDeSalida = scanner.nextLine();
-
+                            System.out.print("Fecha de Llegada del viaje: ");
+                            String fechaDeLlegada = scanner.nextLine();
                             System.out.print("Horario de salida: ");
                             String horarioDeSalida = scanner.nextLine();
-
-                             System.out.print("Fecha de Llegada del viaje: ");
-                            String fechaDeLlegada = scanner.nextLine();
-
                             System.out.print("Horario de llegada: ");
                             String horarioDeLlegada = scanner.nextLine();
-                            
-                             System.out.print("Precio: ");
-                            double precioDeViaje = scanner.nextDouble();
-                            scanner.nextLine();
-                            
-                             System.out.print("Distancia: ");
-                            double distanciaDeViaje = scanner.nextDouble();
-                            scanner.nextLine();
-                            
-                             System.out.print("Costo: ");
-                            double costoDeViaje = scanner.nextDouble();
-                            scanner.nextLine();
-                            
+
                             ciudadService.getCiudadesToViaje();
                             System.out.print("Codigo postal de la Ciudad-Origen: ");
                             String ciudadOrigen = scanner.nextLine();
                             System.out.print("Codigo postal de la Ciudad-Destino: ");
                             String ciudadDestino = scanner.nextLine();
-                            
+
                             choferService.mostrarChoferesToViaje();
                             System.out.print("Dni del chofer para asignarlo al viaje");
                             Long dniChofer = scanner.nextLong();
                             scanner.nextLine();
-                            
+
                             System.out.print("Queres Asignar un Vehiculo de tipo (colectivo | minibus ?");
                             String vehiculoSeleccionado = scanner.nextLine().trim().toLowerCase();
-                            String patenteDeVehiculo="";
-                            if(vehiculoSeleccionado.equalsIgnoreCase("colectivo")){
+                            String patenteDeVehiculo = "";
+                            if (vehiculoSeleccionado.equalsIgnoreCase("colectivo")) {
                                 vehiculoService.mostrarVehiculosColectivos();
                                 System.out.print("Patente del colectivo para asignarlo al viaje: ");
                                 patenteDeVehiculo = scanner.nextLine();
-                                
-                            }else if(vehiculoSeleccionado.equalsIgnoreCase("minibus")){
+
+                            } else if (vehiculoSeleccionado.equalsIgnoreCase("minibus")) {
                                 vehiculoService.mostrarVehiculosMinibus();
                                 System.out.print("Patente del Minibus para asignarlo al viaje: ");
                                 patenteDeVehiculo = scanner.nextLine();
                             }
-                            
+
                             Ciudad ciudadDeOrigen = ciudadService.getCiudadSegunPostal(ciudadOrigen);
                             Ciudad ciudadDeDestino = ciudadService.getCiudadSegunPostal(ciudadDestino);
-                            
-                            Chofer chofer=choferService.choferPorDni(dniChofer);
-                            
+
+                            Chofer chofer = choferService.choferPorDni(dniChofer);
+
                             Vehiculo vehiculoToViaje = vehiculoService.vehiculoPorPatente(patenteDeVehiculo);
-                            
-                            
-                            viajeService.planificarViaje(fechaDeSalida, horarioDeSalida, fechaDeLlegada, horarioDeLlegada,precioDeViaje,distanciaDeViaje, costoDeViaje, ciudadDeOrigen, ciudadDeDestino, chofer, vehiculoToViaje);
-                            
-                            
+
+                            viajeService.planificarViaje(fechaDeSalida, horarioDeSalida, fechaDeLlegada, horarioDeLlegada, precioDeViaje, distanciaDeViaje, costoDeViaje, ciudadDeOrigen, ciudadDeDestino, chofer, vehiculoToViaje);
+
                             viajeExitoso = true;
-                        
+
                         } catch (CiudadesIgualesExcepcion e) {
                             System.out.println("Error: " + e.getMessage());
                         } catch (ChoferOcupadoExcepcion e) {
@@ -435,8 +413,8 @@ public class TransporteSa {
                             System.out.println("Error: " + e.getMessage());
                         } catch (ICategoriaInvalidaException e) {
                             System.out.println("Error: " + e.getMessage());
-                        } 
-                        
+                        }
+
                         if (viajeExitoso) {
                             System.out.print("¿Desea Crear otro Viaje? (s/n): ");
                             continuarRegistrarViaje = scanner.nextLine().trim().toLowerCase();
@@ -490,13 +468,13 @@ public class TransporteSa {
         System.out.println("        LISTADO de CHOFERES AGREGADOS CORRECTAMENTE");
         System.out.println("----------------------------------------------------------------------");
         choferService.mostrarChoferes();
-        
+
         //TEST DE PRUEBA Vehiculos AGREGADOS CORRECTAMENTE
         System.out.println("----------------------------------------------------------------------");
         System.out.println("        LISTADO DE VEHICULOS AGREGADOS CORRECTAMENTE");
         System.out.println("----------------------------------------------------------------------");
         vehiculoService.mostrarVehiculos();
-        
+
         //TEST DE PRUEBA CIUDADES AGREGADAS CORRECTAMENTE
         System.out.println("----------------------------------------------------------------------");
         System.out.println("        LISTADO DE CIUDADES AGREGADOS CORRECTAMENTE");

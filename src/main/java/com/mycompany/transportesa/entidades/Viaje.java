@@ -17,9 +17,6 @@ public class Viaje {
     private String fechaDeLlegada;
     private String horarioSalida;
     private String horarioLlegada;
-    private double precioPorPasajero;
-    private double distanciaEnKilometro;
-    private double costoPorKilometro;
     private EstadoDeViajeEnum estadoDeViaje;
     private Ciudad ciudadOrigen;
     private Ciudad ciudadDestino;
@@ -31,9 +28,6 @@ public class Viaje {
         this.fechaDeLlegada = fechaDeLlegada;
         this.horarioSalida = horarioSalida;
         this.horarioLlegada = horarioLlegada;
-        this.precioPorPasajero = precioPorPasajero;
-        this.distanciaEnKilometro = distanciaEnKilometro;
-        this.costoPorKilometro = costoPorKilometro;
         this.estadoDeViaje = estadoDeViaje;
         this.ciudadOrigen = ciudadOrigen;
         this.ciudadDestino = ciudadDestino;
@@ -73,31 +67,7 @@ public class Viaje {
         this.horarioLlegada = horarioLlegada;
     }
 
-    public double getPrecioPorPasajero() {
-        return precioPorPasajero;
-    }
-
-    public void setPrecioPorPasajero(double precioPorPasajero) {
-        this.precioPorPasajero = precioPorPasajero;
-    }
-
-    public double getDistanciaEnKilometro() {
-        return distanciaEnKilometro;
-    }
-
-    public void setDistanciaEnKilometro(double distanciaEnKilometro) {
-        this.distanciaEnKilometro = distanciaEnKilometro;
-    }
-
-    public double getCostoPorKilometro() {
-        return costoPorKilometro;
-    }
-
-    public void setCostoPorKilometro(double costoPorKilometro) {
-        this.costoPorKilometro = costoPorKilometro;
-    }
-
-    public EstadoDeViajeEnum getEstadoDeViaje() {
+      public EstadoDeViajeEnum getEstadoDeViaje() {
         return estadoDeViaje;
     }
 
@@ -139,6 +109,8 @@ public class Viaje {
 
     @Override
     public String toString() {
-        return "Viaje{" + "fechaDeSalida=" + fechaDeSalida + ", fechaDeLlegada=" + fechaDeLlegada + ", horarioSalida=" + horarioSalida + ", horarioLlegada=" + horarioLlegada + ", precioPorPasajero=" + precioPorPasajero + ", distanciaEnKilometro=" + distanciaEnKilometro + ", costoPorKilometro=" + costoPorKilometro + ", estadoDeViaje=" + estadoDeViaje + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", vehiculo=" + vehiculo + ", chofer=" + chofer + '}';
+        return "Viaje{" + "fechaDeSalida=" + fechaDeSalida + ", fechaDeLlegada=" + fechaDeLlegada + ", horarioSalida=" + horarioSalida + ", horarioLlegada=" + horarioLlegada + ", estadoDeViaje=" + estadoDeViaje + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", vehiculo=" + vehiculo + ", chofer=" + chofer + '}';
     }
+
+  
 }

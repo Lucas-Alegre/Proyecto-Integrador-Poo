@@ -104,7 +104,6 @@ public class ViajeService {
                 System.out.println("Hasta: " + viaje.getCiudadDestino().getNombre());
                 System.out.println("Chofer: " + viaje.getChofer().getNombre() + " " + viaje.getChofer().getApellido());
                 System.out.println("Vehículo: Patente " + viaje.getVehiculo().getPatente()); 
-                System.out.println("Precio por pasajero: $" + viaje.getPrecioPorPasajero());
                 System.out.println("Estado: " + viaje.getEstadoDeViaje());
             }
         }
@@ -127,7 +126,6 @@ public class ViajeService {
                 System.out.println("Ciudad origen: " + viaje.getCiudadOrigen().getNombre());
                 System.out.println("Ciudad destino: " + viaje.getCiudadDestino().getNombre());
                 System.out.println("Chofer: " + viaje.getChofer().getNombre() + " " + viaje.getChofer().getApellido());
-                System.out.println("Precio por pasajero: $" + viaje.getPrecioPorPasajero());
                 System.out.println("Estado: " + viaje.getEstadoDeViaje());
             }
         }
