@@ -18,9 +18,7 @@ public class Chofer extends Persona {
     private List<ChoferCategoria> categorias;
     private List<Viaje> viajeLista;
 
-    public Chofer(long dni, String nombre,
-            String apellido, String nroLicencia,
-            List<ChoferCategoria> categorias, List<Viaje> viajeLista) {
+    public Chofer(long dni, String nombre,String apellido, String nroLicencia,List<ChoferCategoria> categorias, List<Viaje> viajeLista) {
         super(dni, nombre, apellido);
         this.nroLicencia = nroLicencia;
         this.categorias = categorias;
