@@ -253,7 +253,7 @@ public class TransporteSa {
                             System.out.print("¿Desea ingresar otro chofer? (s/n): ");
                             continuar = scanner.nextLine().trim().toLowerCase();
                         } else {
-                            System.out.print("No lograste Carcar un Chofer, ¿Deseas intentarlo nuevamente e ingresar otro chofer? (s/n): ");
+                            System.out.print("No lograste Cargar el Chofer, ¿Deseas intentarlo nuevamente e ingresar otro chofer? (s/n): ");
                             continuar = scanner.nextLine().trim().toLowerCase();
 
                         }
@@ -270,10 +270,6 @@ public class TransporteSa {
                         try {
                             System.out.print("Patente: ");
                             String patente = scanner.nextLine();
-
-                            System.out.print("Capacidad: ");
-                            int capacidad = scanner.nextInt();
-                            scanner.nextLine();
 
                             System.out.print("Año de Fabricación: ");
                             int anioFabricacion = scanner.nextInt();
