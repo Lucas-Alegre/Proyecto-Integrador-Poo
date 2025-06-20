@@ -11,6 +11,7 @@ import com.mycompany.transportesa.excepciones.CiudadesIgualesExcepcion;
 import com.mycompany.transportesa.excepciones.VehiculoYaRegistradoExcepcion;
 import com.mycompany.transportesa.excepciones.ChoferYaRegistradoExcepcion;
 import com.mycompany.transportesa.excepciones.ExcesoDePasajerosException;
+import com.mycompany.transportesa.excepciones.NotTipoDeVehiculoDisponibleException;
 
 import com.mycompany.transportesa.servicios.*;
 import java.util.ArrayList;
@@ -120,21 +121,19 @@ public class TransporteSa {
             System.out.println("                 " + "0. Salir");
             System.out.println("-------------------------------------------------------------------");
             System.out.print("Ingrese opción: ");
-            
+
             //scanner.nextLine();
             while (!scanner.hasNextInt()) {
                 System.out.print("Por favor ingrese un número válido: ");
                 scanner.next();
             }
 
-            
-
             opcion = scanner.nextInt();
             scanner.nextLine();
             switch (opcion) {
                 case 1:
-                System.out.println("Registrar chofer manualmente");
-                boolean registroExitoso = false; // Ver si toda esta logica se la puede sacar hacia una funcion, y tener un Min mas ordenado
+                    System.out.println("Registrar chofer manualmente");
+                    boolean registroExitoso = false; // Ver si toda esta logica se la puede sacar hacia una funcion, y tener un Min mas ordenado
                     String continuar;
                     do {
                         try {
@@ -167,7 +166,7 @@ public class TransporteSa {
                                 String fechaVto = scanner.nextLine();
                                 ChoferCategoria choferCategoria = new ChoferCategoria(fechaVto, chofer, categoriaMicrobus);
                                 listaCategorias.add(choferCategoria);
-                                registroExitoso=true;
+                                registroExitoso = true;
                             }
 
                             //Preguntar si tiene categoría COLECTIVO
@@ -179,12 +178,12 @@ public class TransporteSa {
                                 String fechaVto = scanner.nextLine();
                                 ChoferCategoria choferCategoria = new ChoferCategoria(fechaVto, chofer, categoriaColectivo);
                                 listaCategorias.add(choferCategoria);
-                                registroExitoso=true;
+                                registroExitoso = true;
                             }
 
                             //Validación: debe tener al menos una categoría // agregar una nueva excepcion
                             if (listaCategorias.isEmpty()) {
-                                throw new ChoferSinCategorias("⚠️ Error: El chofer debe tener al menos una categoría para manjerar un Vehiculo (Colectivo o Microbus).");
+                                throw new ChoferSinCategorias("Error: El chofer debe tener al menos una categoría para manjerar un Vehiculo (Colectivo o Microbus).");
                             }
 
                             //Ahora se asignan las categorías al chofer
@@ -194,27 +193,117 @@ public class TransporteSa {
                             choferService.registrarChofer(chofer);
 
                         } catch (ChoferYaRegistradoExcepcion e) {
-                            System.out.println("⚠️ Chofer ya registrado: " + e.getMessage());
-                            
+                            System.out.println("Chofer ya registrado: " + e.getMessage());
+
                         } catch (ChoferSinCategorias e) {
                             System.out.println(e.getMessage());
                             //scanner.nextLine(); // limpiar buffer
                         }
-                        if(registroExitoso){
+                        if (registroExitoso) {
                             System.out.print("¿Desea ingresar otro chofer? (s/n): ");
-                        continuar = scanner.nextLine().trim().toLowerCase();
-                        }else{
+                            continuar = scanner.nextLine().trim().toLowerCase();
+                        } else {
                             System.out.print("No lograste Carcar un Chofer, ¿Deseas intentarlo nuevamente e ingresar otro chofer? (s/n): ");
                             continuar = scanner.nextLine().trim().toLowerCase();
-                            
+
                         }
 
                     } while (continuar.equals("s"));
 
                     break;
                 case 2:
-                    System.out.println("Cargar vehículo por consola.");
-                    // cargarVehiculoPorConsola(vehiculoService);
+                    System.out.println("Registrar Vehiculos manualmente");
+                    boolean VehiculosExitoso = false; // Ver si toda esta logica se la puede sacar hacia una funcion, y tener un Min mas ordenado
+                    String continuarRegistrRegistroVehiculo;
+                    String tipoDeVehiculo = "";
+                    do {
+                        try {
+                            System.out.print("Patente: ");
+                            String patente = scanner.nextLine();
+
+                            System.out.print("Capacidad: ");
+                            int capacidad = scanner.nextInt();
+                            scanner.nextLine();
+
+                            System.out.print("Año de Fabricación: ");
+                            int anioFabricacion = scanner.nextInt();
+                            scanner.nextLine();
+
+                            System.out.print("Kilometraje: ");
+                            double kilometraje = scanner.nextDouble();
+                            scanner.nextLine();
+
+                            ArrayList<Viaje> viajes = new ArrayList<>(); // Lista vacía
+
+                            boolean vehiculoConPisoDoble = false;
+                            boolean tieneBodega = false;
+                            boolean tieneAireAcondicionado = false;
+                            
+                            System.out.print("¿El Vehiculo es Colectivo? (s/n): ");
+                            String colectivo = scanner.nextLine().trim().toLowerCase();
+                            
+                            if (colectivo.equals("s")) {
+                                tipoDeVehiculo = "colectivo";
+
+                                System.out.print("Tiene Piso doble? (s/n): ");
+                                String tienePisoDoble = scanner.nextLine().trim().toLowerCase();
+
+                                if (tienePisoDoble.equals("s")) {
+                                    vehiculoConPisoDoble = true;
+                                }
+                            }else{
+                               
+                                System.out.print("¿El Vehiculo es Minibus? (s/n): ");
+                                String minibus = scanner.nextLine().trim().toLowerCase();
+                                if (minibus.equals("s")) {
+                                    tipoDeVehiculo = "minibus";
+
+                                    System.out.print("Tiene Bodega? (s/n): ");
+                                    String tieneUnaBodega = scanner.nextLine().trim().toLowerCase();
+
+                                    if (tieneUnaBodega.equals("s")) {
+                                        tieneBodega = true;
+                                    }
+
+                                    System.out.print("Tiene Aire Acondicionado? (s/n): ");
+                                    String tieneUnAireAcondicionado = scanner.nextLine().trim().toLowerCase();
+
+                                    if (tieneUnAireAcondicionado.equals("s")) {
+                                        tieneAireAcondicionado = true;
+                                    }
+                                }else{
+                                    throw new NotTipoDeVehiculoDisponibleException("Error: No tenes un Vehiculo para ser Registrado. Necesitas un (Colectivo o Minibus)");
+                                }
+                            }
+
+                            
+
+                            //Primero se crea el Vehiculo.
+                            if (tipoDeVehiculo.equals("colectivo")) {
+                                Vehiculo vehiculoColectivo = new Colectivo(patente, capacidad, anioFabricacion, kilometraje, viajes, vehiculoConPisoDoble);
+                                vehiculoService.registrarVehiculo(vehiculoColectivo);
+                                VehiculosExitoso = true;
+                            } else {
+                                Vehiculo vehiculoMinibus = new Minibus(patente, capacidad, anioFabricacion, kilometraje, viajes, tieneBodega, tieneAireAcondicionado);
+                                vehiculoService.registrarVehiculo(vehiculoMinibus);
+                                VehiculosExitoso = true;
+                            }
+                        } catch (VehiculoYaRegistradoExcepcion e) {
+                            System.out.println("Vehiculo ya registrado: " + e.getMessage());
+                        } catch (NotTipoDeVehiculoDisponibleException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        
+                        if (VehiculosExitoso) {
+                            System.out.print("¿Desea ingresar otro Vehiculo? (s/n): ");
+                            continuarRegistrRegistroVehiculo = scanner.nextLine().trim().toLowerCase();
+                        } else {
+                            System.out.print("No lograste Carcar un Chofer, ¿Deseas intentarlo nuevamente e ingresar otro vehiculo? (s/n): ");
+                            continuarRegistrRegistroVehiculo = scanner.nextLine().trim().toLowerCase();
+                        }
+
+                    } while (continuarRegistrRegistroVehiculo.equals("s"));
+
                     break;
 
                 case 3:
@@ -260,12 +349,18 @@ public class TransporteSa {
         System.out.println("        Informe de viajes a realizar de un colectivo determinado");
         System.out.println("----------------------------------------------------------------------");
         viajeService.mostrarViajesPorColectivoDetallado(colectivo1);
-        
-         //TEST DE PRUEBA CHOFERES AGREGADOS CORRECTAMENTE
+
+        //TEST DE PRUEBA CHOFERES AGREGADOS CORRECTAMENTE
         System.out.println("----------------------------------------------------------------------");
         System.out.println("        LISTADO de CHOFERES AGREGADOS CORRECTAMENTE");
         System.out.println("----------------------------------------------------------------------");
         choferService.mostrarChoferes();
+        
+        //TEST DE PRUEBA Vehiculos AGREGADOS CORRECTAMENTE
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("        LISTADO DE VEHICULOS AGREGADOS CORRECTAMENTE");
+        System.out.println("----------------------------------------------------------------------");
+        vehiculoService.mostrarVehiculos();
 
     }
 }
