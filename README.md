@@ -71,7 +71,7 @@ Proyecto-Integrador-Poo/
 
 - Registro y gestión de choferes y vehículos.
 - Planificación de viajes entre ciudades (asociando chofer y vehículo).
-- Validación de superposición de viajes y descanso de choferes.
+- Validación de superposición de viajes 
 - Reportes de viajes programados, por chofer o vehículo.
 - Simulación de almacenamiento en memoria (repositorio simple).
 - Interfaz de consola para navegar por el sistema.
