@@ -25,7 +25,7 @@ public class ViajeService {
             String fechaDeLlegada, String horarioLlegada,
             Ciudad origen, Ciudad destino,
             Chofer chofer, Vehiculo vehiculo)
-            throws CiudadesIgualesExcepcion, ChoferOcupadoExcepcion, VehiculoNoDisponibleExcepcion, ICategoriaInvalidaException {
+            throws CiudadesIgualesExcepcion, VehiculoNoDisponibleExcepcion, ICategoriaInvalidaException {
 
         if (origen.equals(destino)) {
             throw new CiudadesIgualesExcepcion("La ciudad de origen y destino no pueden ser la misma.");
@@ -42,7 +42,7 @@ public class ViajeService {
 
             boolean seSuperpone = nuevaSalida.isBefore(llegada) && nuevaLlegada.isAfter(salida);
             if (seSuperpone) {
-                throw new ChoferOcupadoExcepcion("El chofer ya tiene un viaje que se superpone.");
+                throw new VehiculoNoDisponibleExcepcion("El chofer ya tiene un viaje que se superpone.");
             }
         }
 

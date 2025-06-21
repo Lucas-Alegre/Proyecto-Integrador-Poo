@@ -5,14 +5,9 @@ package com.mycompany.transportesa;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 import com.mycompany.transportesa.entidades.*;
-import com.mycompany.transportesa.excepciones.ChoferOcupadoExcepcion;
-import com.mycompany.transportesa.excepciones.ChoferSinCategorias;
+import com.mycompany.transportesa.excepciones.ChoferNoDispinibleExcepcion;
 import com.mycompany.transportesa.excepciones.CiudadesIgualesExcepcion;
-import com.mycompany.transportesa.excepciones.VehiculoYaRegistradoExcepcion;
-import com.mycompany.transportesa.excepciones.ChoferYaRegistradoExcepcion;
-import com.mycompany.transportesa.excepciones.ExcesoDePasajerosException;
 import com.mycompany.transportesa.excepciones.ICategoriaInvalidaException;
-import com.mycompany.transportesa.excepciones.NotTipoDeVehiculoDisponibleException;
 import com.mycompany.transportesa.excepciones.VehiculoNoDisponibleExcepcion;
 
 import com.mycompany.transportesa.servicios.*;
@@ -28,7 +23,7 @@ import java.util.Scanner;
 public class TransporteSa {
 
     //commit prueba caro
-    public static void main(String[] args) throws ExcesoDePasajerosException {
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         // Crear servicios
@@ -58,11 +53,11 @@ public class TransporteSa {
             choferService.registrarChofer(chofer4);
             choferService.registrarChofer(chofer5);
             choferService.registrarChofer(chofer6);
-            /*choferService.registrarChofer(chofer7);
+            choferService.registrarChofer(chofer7);
             choferService.registrarChofer(chofer8);
             choferService.registrarChofer(chofer9);
-            choferService.registrarChofer(chofer10);*/
-        } catch (ChoferYaRegistradoExcepcion e) {
+            choferService.registrarChofer(chofer10);
+        } catch (ChoferNoDispinibleExcepcion e) {
             System.out.println("Error al registrar chofer: " + e.getMessage());
         }
         // Crear colectivos
@@ -91,7 +86,7 @@ public class TransporteSa {
             vehiculoService.registrarVehiculo(minibus3);
             vehiculoService.registrarVehiculo(minibus4);
             vehiculoService.registrarVehiculo(minibus5);
-        } catch (VehiculoYaRegistradoExcepcion e) {
+        } catch (VehiculoNoDisponibleExcepcion e) {
             System.out.println("Error al registrar vehículo: " + e.getMessage());
         }
         // Crear ciudades (una por provincia)
@@ -242,7 +237,7 @@ public class TransporteSa {
 
                             //Validación: debe tener al menos una categoría // agregar una nueva excepcion
                             if (listaCategorias.isEmpty()) {
-                                throw new ChoferSinCategorias("Error: El chofer debe tener al menos una categoría para manjerar un Vehiculo (Colectivo o Microbus).");
+                                throw new ChoferNoDispinibleExcepcion("Error: El chofer debe tener al menos una categoría para manjerar un Vehiculo (Colectivo o Microbus).");
                             }
 
                             //Ahora se asignan las categorías al chofer
@@ -251,12 +246,9 @@ public class TransporteSa {
                             //Intentamos registrar
                             choferService.registrarChofer(chofer);
 
-                        } catch (ChoferYaRegistradoExcepcion e) {
+                        } catch (ChoferNoDispinibleExcepcion e) {
                             System.out.println("Chofer ya registrado: " + e.getMessage());
 
-                        } catch (ChoferSinCategorias e) {
-                            System.out.println(e.getMessage());
-                            //scanner.nextLine(); // limpiar buffer
                         }
                         if (registroExitoso) {
                             System.out.print("¿Desea ingresar otro chofer? (s/n): ");
@@ -320,7 +312,7 @@ public class TransporteSa {
                                 }
 
                             } else {
-                                throw new NotTipoDeVehiculoDisponibleException("Error: No hay un tipo de vehículo válido. Debe ser Colectivo o Minibus.");
+                                throw new VehiculoNoDisponibleExcepcion("Error: No hay un tipo de vehículo válido. Debe ser Colectivo o Minibus.");
                             }
 
                             //Primero se crea el Vehiculo.
@@ -333,10 +325,8 @@ public class TransporteSa {
                                 vehiculoService.registrarVehiculo(vehiculoMinibus);
                                 VehiculosExitoso = true;
                             }
-                        } catch (VehiculoYaRegistradoExcepcion e) {
+                        } catch (VehiculoNoDisponibleExcepcion e) {
                             System.out.println("Vehiculo ya registrado: " + e.getMessage());
-                        } catch (NotTipoDeVehiculoDisponibleException e) {
-                            System.out.println(e.getMessage());
                         }
 
                         if (VehiculosExitoso) {
@@ -403,8 +393,6 @@ public class TransporteSa {
                             viajeExitoso = true;
 
                         } catch (CiudadesIgualesExcepcion e) {
-                            System.out.println("Error: " + e.getMessage());
-                        } catch (ChoferOcupadoExcepcion e) {
                             System.out.println("Error: " + e.getMessage());
                         } catch (VehiculoNoDisponibleExcepcion e) {
                             System.out.println("Error: " + e.getMessage());
