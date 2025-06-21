@@ -17,25 +17,23 @@ public class Viaje {
     private String fechaDeLlegada;
     private String horarioSalida;
     private String horarioLlegada;
-    private EstadoDeViajeEnum estadoDeViaje;
     private Ciudad ciudadOrigen;
     private Ciudad ciudadDestino;
     private Vehiculo vehiculo;
     private Chofer chofer;
 
-    public Viaje(String fechaDeSalida, String fechaDeLlegada, String horarioSalida, String horarioLlegada, EstadoDeViajeEnum estadoDeViaje, Ciudad ciudadOrigen, Ciudad ciudadDestino, Vehiculo vehiculo, Chofer chofer) {
+    public Viaje(String fechaDeSalida, String fechaDeLlegada, String horarioSalida, String horarioLlegada, Ciudad ciudadOrigen, Ciudad ciudadDestino, Vehiculo vehiculo, Chofer chofer) {
         this.fechaDeSalida = fechaDeSalida;
         this.fechaDeLlegada = fechaDeLlegada;
         this.horarioSalida = horarioSalida;
         this.horarioLlegada = horarioLlegada;
-        this.estadoDeViaje = estadoDeViaje;
         this.ciudadOrigen = ciudadOrigen;
         this.ciudadDestino = ciudadDestino;
         this.vehiculo = vehiculo;
         this.chofer = chofer;
     }
 
-     public String getFechaDeSalida() {
+    public String getFechaDeSalida() {
         return fechaDeSalida;
     }
 
@@ -65,14 +63,6 @@ public class Viaje {
 
     public void setHorarioLlegada(String horarioLlegada) {
         this.horarioLlegada = horarioLlegada;
-    }
-
-      public EstadoDeViajeEnum getEstadoDeViaje() {
-        return estadoDeViaje;
-    }
-
-    public void setEstadoDeViaje(EstadoDeViajeEnum estadoDeViaje) {
-        this.estadoDeViaje = estadoDeViaje;
     }
 
     public Ciudad getCiudadOrigen() {
@@ -109,8 +99,7 @@ public class Viaje {
 
     @Override
     public String toString() {
-        return "Viaje{" + "fechaDeSalida=" + fechaDeSalida + ", fechaDeLlegada=" + fechaDeLlegada + ", horarioSalida=" + horarioSalida + ", horarioLlegada=" + horarioLlegada + ", estadoDeViaje=" + estadoDeViaje + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", vehiculo=" + vehiculo + ", chofer=" + chofer + '}';
+        return "Viaje{" + "fechaDeSalida=" + fechaDeSalida + ", fechaDeLlegada=" + fechaDeLlegada + ", horarioSalida=" + horarioSalida + ", horarioLlegada=" + horarioLlegada + ", ciudadOrigen=" + ciudadOrigen + ", ciudadDestino=" + ciudadDestino + ", vehiculo=" + vehiculo + ", chofer=" + chofer + '}';
     }
 
-  
 }

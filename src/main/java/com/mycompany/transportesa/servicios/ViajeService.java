@@ -80,7 +80,6 @@ public class ViajeService {
 
         // Crear y asignar el nuevo viaje
         Viaje nuevoviaje = new Viaje(fechaDeSalida, fechaDeLlegada, horarioSalida, horarioLlegada,
-                EstadoDeViajeEnum.PROGRAMADO,
                 origen, destino, vehiculo, chofer);
 
         listaViajes.add(nuevoviaje);
@@ -95,16 +94,15 @@ public class ViajeService {
     public void mostrarViajesProgramadosDetallados() {
 
         for (Viaje viaje : listaViajes) {
-            if (viaje.getEstadoDeViaje() == EstadoDeViajeEnum.PROGRAMADO) {
-                System.out.println("Fecha: " + viaje.getFechaDeSalida());
-                System.out.println("Fecha de llegada: " + viaje.getFechaDeLlegada());
-                System.out.println("Horario de salida: " + viaje.getHorarioSalida());
-                System.out.println("Desde: " + viaje.getCiudadOrigen().getNombre());
-                System.out.println("Hasta: " + viaje.getCiudadDestino().getNombre());
-                System.out.println("Chofer: " + viaje.getChofer().getNombre() + " " + viaje.getChofer().getApellido());
-                System.out.println("Vehículo: Patente " + viaje.getVehiculo().getPatente());
-                System.out.println("Estado: " + viaje.getEstadoDeViaje());
-            }
+
+            System.out.println("Fecha: " + viaje.getFechaDeSalida());
+            System.out.println("Fecha de llegada: " + viaje.getFechaDeLlegada());
+            System.out.println("Horario de salida: " + viaje.getHorarioSalida());
+            System.out.println("Desde: " + viaje.getCiudadOrigen().getNombre());
+            System.out.println("Hasta: " + viaje.getCiudadDestino().getNombre());
+            System.out.println("Chofer: " + viaje.getChofer().getNombre() + " " + viaje.getChofer().getApellido());
+            System.out.println("Vehículo: Patente " + viaje.getVehiculo().getPatente());
+
         }
     }
 
@@ -115,8 +113,7 @@ public class ViajeService {
         boolean tieneViajesPendientes = false;
 
         for (Viaje viaje : listaViajes) {
-            if (viaje.getVehiculo().equals(colectivo)
-                    && viaje.getEstadoDeViaje() != EstadoDeViajeEnum.FINALIZADO) {
+            if (viaje.getVehiculo().equals(colectivo)) {
 
                 tieneViajesPendientes = true;
                 System.out.println("Fecha: " + viaje.getFechaDeSalida());
@@ -125,7 +122,6 @@ public class ViajeService {
                 System.out.println("Ciudad origen: " + viaje.getCiudadOrigen().getNombre());
                 System.out.println("Ciudad destino: " + viaje.getCiudadDestino().getNombre());
                 System.out.println("Chofer: " + viaje.getChofer().getNombre() + " " + viaje.getChofer().getApellido());
-                System.out.println("Estado: " + viaje.getEstadoDeViaje());
             }
         }
 
