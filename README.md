@@ -38,15 +38,9 @@ Proyecto-Integrador-Poo/
                         │   └── Viaje.java
                         ├── excepciones
                         │   ├── ChoferNoDisponibleExcepcion.java
-                        │   ├── ChoferOcupadoExcepcion.java
-                        │   ├── ChoferSinCategorias.java
-                        │   ├── ChoferYaRegistradoExcepcion.java
                         │   ├── CiudadesIgualesExcepcion.java
-                        │   ├── ExcesoDePasajerosException.java
                         │   ├── ICategoriaInvalidaException.java
-                        │   ├── NotTipoDeVehiculoDisponibleException.java
                         │   ├── VehiculoNoDisponibleExcepcion.java
-                        │   └── VehiculoYaRegistradoException.java
                         ├── servicios
                         │   ├── ChoferService.java
                         │   ├── CiudadService.java
