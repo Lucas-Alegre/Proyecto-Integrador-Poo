@@ -95,9 +95,10 @@ public class ViajeService {
 
         for (Viaje viaje : listaViajes) {
 
-            System.out.println("Fecha: " + viaje.getFechaDeSalida());
+            System.out.println("Fecha de Salida: " + viaje.getFechaDeSalida());
             System.out.println("Fecha de llegada: " + viaje.getFechaDeLlegada());
             System.out.println("Horario de salida: " + viaje.getHorarioSalida());
+            System.out.println("Horario de Llegada: " + viaje.getHorarioLlegada());
             System.out.println("Desde: " + viaje.getCiudadOrigen().getNombre());
             System.out.println("Hasta: " + viaje.getCiudadDestino().getNombre());
             System.out.println("Chofer: " + viaje.getChofer().getNombre() + " " + viaje.getChofer().getApellido());
@@ -116,9 +117,10 @@ public class ViajeService {
             if (viaje.getVehiculo().equals(colectivo)) {
 
                 tieneViajesPendientes = true;
-                System.out.println("Fecha: " + viaje.getFechaDeSalida());
+                System.out.println("Fecha de Salida: " + viaje.getFechaDeSalida());
                 System.out.println("Horario salida: " + viaje.getHorarioSalida());
                 System.out.println("Fecha de llegada: " + viaje.getFechaDeLlegada());
+                System.out.println("Horario de Llegada: " + viaje.getHorarioLlegada());
                 System.out.println("Ciudad origen: " + viaje.getCiudadOrigen().getNombre());
                 System.out.println("Ciudad destino: " + viaje.getCiudadDestino().getNombre());
                 System.out.println("Chofer: " + viaje.getChofer().getNombre() + " " + viaje.getChofer().getApellido());
