@@ -18,13 +18,15 @@ import java.util.Scanner;
 
 /**
  * Clase principal del sistema Transporte S.A. que contiene el método main.
- * Permite gestionar choferes, vehículos, ciudades y viajes mediante un menú interactivo
- * por consola. Utiliza servicios para registrar, consultar y planificar viajes.
+ * Permite gestionar choferes, vehículos, ciudades y viajes mediante un menú
+ * interactivo por consola. Utiliza servicios para registrar, consultar y
+ * planificar viajes.
  * <p>
- * Se incluyen validaciones como la verificación de ciudades duplicadas, choferes con
- * categorías válidas, vehículos disponibles y cumplimiento del descanso mínimo para los choferes.
- * También se pueden generar reportes como la cantidad de viajes por chofer o los viajes
- * programados para un colectivo determinado.
+ * Se incluyen validaciones como la verificación de ciudades duplicadas,
+ * choferes con categorías válidas, vehículos disponibles y cumplimiento del
+ * descanso mínimo para los choferes. También se pueden generar reportes como la
+ * cantidad de viajes por chofer o los viajes programados para un colectivo
+ * determinado.
  * </p>
  *
  * @author Alegre
@@ -33,18 +35,26 @@ import java.util.Scanner;
  */
 public class TransporteSa {
 
-     public static void main(String[] args) {
+    /**
+     * Método principal que ejecuta el sistema de Transporte S.A. Inicializa
+     * datos y lanza el menú interactivo para realizar operaciones como
+     * registrar entidades, planificar viajes y emitir reportes.
+     *
+     * @param args Argumentos de línea de comandos (no utilizados).
+     */
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        // Crear servicios
 
+// =================== Inicialización de servicios ===================
         ChoferService choferService = new ChoferService();
         VehiculoService vehiculoService = new VehiculoService();
         ViajeService viajeService = new ViajeService();
         InformeCantidadViajesService informe = new InformeCantidadViajesService();
         CiudadService ciudadService = new CiudadService();
 
-        // Crear choferes
+// =================== Registro automático de choferes ===================
+        // Crea 10 choferes con datos de ejemplo y los registra en el sistema
         Chofer chofer1 = new Chofer(12345678, "Carlos", "Pérez", "ABC123", new ArrayList<>(), new ArrayList<>());
         Chofer chofer2 = new Chofer(87654321, "María", "Gómez", "XYZ789", new ArrayList<>(), new ArrayList<>());
         Chofer chofer3 = new Chofer(11111111, "Luis", "Martínez", "LIC001", new ArrayList<>(), new ArrayList<>());
@@ -70,14 +80,16 @@ public class TransporteSa {
         } catch (ChoferNoDispinibleExcepcion e) {
             System.out.println("Error al registrar chofer: " + e.getMessage());
         }
-        // Crear colectivos
+
+// =================== Registro automático de vehículos ===================
+        // Crea 5 colectivos y 5 minibuses con datos de ejemplo y los registra
+        // utilizando el servicio de vehículos. Incluye manejo de excepciones.
         Colectivo col1 = new Colectivo("AAA111", 60, new ArrayList<>(), true);
         Colectivo col2 = new Colectivo("BBB222", 20, new ArrayList<>(), false);
         Colectivo col3 = new Colectivo("CCC333", 30, new ArrayList<>(), true);
         Colectivo col4 = new Colectivo("DDD444", 15, new ArrayList<>(), false);
         Colectivo col5 = new Colectivo("EEE555", 50, new ArrayList<>(), true);
 
-        // Crear minibuses
         Minibus minibus1 = new Minibus("ABA212", 10, new ArrayList<>(), true, true); // si anda mal rompe acàs no sigue abajo y va al swirch
         Minibus minibus2 = new Minibus("XCD242", 20, new ArrayList<>(), false, true);
         Minibus minibus3 = new Minibus("LAM864", 20, new ArrayList<>(), true, false);
@@ -99,7 +111,9 @@ public class TransporteSa {
         } catch (VehiculoNoDisponibleExcepcion e) {
             System.out.println("Error al registrar vehículo: " + e.getMessage());
         }
-        // Crear ciudades (una por provincia)
+
+// =================== Registro automático de ciudades ===================
+        // Se registran manualmente 10 ciudades representando distintas provincias.
         Ciudad ciudad1 = new Ciudad("La Plata", ProvinciaEnum.BUENOS_AIRES, "1");
         Ciudad ciudad2 = new Ciudad("Resistencia", ProvinciaEnum.CHACO, "2");
         Ciudad ciudad3 = new Ciudad("Córdoba", ProvinciaEnum.CORDOBA, "3");
@@ -110,30 +124,53 @@ public class TransporteSa {
         Ciudad ciudad8 = new Ciudad("Ushuaia", ProvinciaEnum.TIERRA_DEL_FUEGO, "8");
         Ciudad ciudad9 = new Ciudad("concordia", ProvinciaEnum.ENTRE_RIOS, "3200");
         Ciudad ciudad10 = new Ciudad("Parana", ProvinciaEnum.ENTRE_RIOS, "4200");
-        
-       ciudadService.addCiudad(ciudad1);
-       ciudadService.addCiudad(ciudad2);
-       ciudadService.addCiudad(ciudad3);
-       ciudadService.addCiudad(ciudad4);
-       ciudadService.addCiudad(ciudad5);
-       ciudadService.addCiudad(ciudad9);
-       ciudadService.addCiudad(ciudad10);
-       
 
-        // Menú interactivo
+        ciudadService.addCiudad(ciudad1);
+        ciudadService.addCiudad(ciudad2);
+        ciudadService.addCiudad(ciudad3);
+        ciudadService.addCiudad(ciudad4);
+        ciudadService.addCiudad(ciudad5);
+        ciudadService.addCiudad(ciudad9);
+        ciudadService.addCiudad(ciudad10);
+
+// =================== Menú interactivo con el usuario ===================
+        // Muestra opciones de gestión al usuario mediante un menú por consola.
         int opcion;
         do {
             System.out.println("-------------------------------------------------------------------");
             System.out.println("------------------BIENVENIDO A TRANSPORTE S.A--------------------");
             System.out.println("-------------------------------MENU------------------------------");
             System.out.println("-------------------------------------------------------------------");
+            // ---------------- Opción 1: Registrar ciudad ----------------
+            // Permite al usuario cargar una ciudad validando que no exista otra
             System.out.println("                 " + "1. Cargar ciudad ");
+            // ---------------- Opción 2: Registrar chofer ----------------
+            // Permite registrar un nuevo chofer con datos ingresados por el usuario
+            // y asignarle una o más categorías de licencia válidas.
             System.out.println("                 " + "2. Cargar choferes ");
+            // ---------------- Opción 3: Registrar vehículo ----------------
+            // Permite registrar vehículos (colectivo o minibus) con validación
+            // de tipo, capacidad y atributos específicos.
             System.out.println("                 " + "3. Cargar vehiculos ");
+            // ---------------- Opción 4: Planificar viaje ----------------
+            // Solicita los datos necesarios para planificar un viaje entre ciudades
+            // con un chofer y un vehículo asignado, validando categoría, etc.
             System.out.println("                 " + "4. Planificar viaje");
+            // ---------------- Opción 5: Mostrar viajes programados ----------------
+            // Muestra la lista detallada de todos los viajes registrados.
             System.out.println("                 " + "5. Mostrar viajes programados detalladamente");
+            // ---------------- Opción 6: Consultar viajes por colectivo ----------------
+            // Solicita una patente de colectivo y muestra los viajes programados
+            // para ese vehículo.
+
             System.out.println("                 " + "6. Mostrar viajes por colectivo");
+
+            // ---------------- Opción 7: Informe de cantidad de viajes por chofer ----------------
+            // Genera un informe que muestra cuántos viajes tiene asignado cada chofer.
             System.out.println("                 " + "7. Informe de cantidad de viajes por chofer");
+            // ---------------- Opción 0: Salir ----------------
+            // Finaliza el programa y cierra el scanner.
+
             System.out.println("                 " + "0. Salir");
             System.out.println("-------------------------------------------------------------------");
             System.out.print("Ingrese opción: ");
@@ -481,6 +518,9 @@ public class TransporteSa {
         scanner.close();
 
         scanner.close();
+// ---------------- Test de datos ----------------
+        // Muestra por consola las listas de choferes, vehículos y ciudades
+        // registrados para fines de validación visual durante la prueba.
 
         //TEST DE PRUEBA DE IMPLEMENTACION DE QUE NO SUPERPONGAN VIAJES A UN MISMO CHOFER Y UN CHOFER DEBA DESCANSAR AL MENOS 8 HORAS
         System.out.println("----------------------------------------------------------------------");
