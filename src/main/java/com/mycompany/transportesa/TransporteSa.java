@@ -17,13 +17,23 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- **
- * @author
+ * Clase principal del sistema Transporte S.A. que contiene el método main.
+ * Permite gestionar choferes, vehículos, ciudades y viajes mediante un menú interactivo
+ * por consola. Utiliza servicios para registrar, consultar y planificar viajes.
+ * <p>
+ * Se incluyen validaciones como la verificación de ciudades duplicadas, choferes con
+ * categorías válidas, vehículos disponibles y cumplimiento del descanso mínimo para los choferes.
+ * También se pueden generar reportes como la cantidad de viajes por chofer o los viajes
+ * programados para un colectivo determinado.
+ * </p>
+ *
+ * @author Alegre
+ * @author Aquino
+ * @author Latour
  */
 public class TransporteSa {
 
-    //commit prueba caro
-    public static void main(String[] args) {
+     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         // Crear servicios
