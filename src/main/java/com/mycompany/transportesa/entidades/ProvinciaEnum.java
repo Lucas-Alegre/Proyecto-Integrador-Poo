@@ -5,8 +5,13 @@
 package com.mycompany.transportesa.entidades;
 
 /**
+ * Enumeración que representa todas las provincias de la República Argentina,
+ * incluyendo Ciudad Autónoma de Buenos Aires (CABA). Se utiliza para asociar
+ * una {@link Ciudad} a su provincia correspondiente.
  *
- * @author
+ * @author Alegre
+ * @author Aquino
+ * @author Latour
  */
 public enum ProvinciaEnum {
     BUENOS_AIRES,
