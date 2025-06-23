@@ -9,18 +9,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Servicio que gestiona la planificación y consulta de {@link Viaje}s entre
+ * {@link Ciudad}es. Valida la disponibilidad de {@link Chofer}es y
+ * {@link Vehiculo}s antes de registrar un nuevo viaje.
  *
- * @author
+ * @author Alegre
+ * @author Aquino
+ * @author Latour
  */
 public class ViajeService {
 
     private ArrayList<Viaje> listaViajes;
 
+    /**
+     * Inicializa el servicio con una lista vacía de viajes.
+     */
     public ViajeService() {
         listaViajes = new ArrayList<>();
     }
 
-    //2. Planificar un viaje entre dos ciudades
+    /**
+     * Planifica un nuevo {@link Viaje} entre dos {@link Ciudad}es con
+     * validaciones de chofer y vehículo.
+     *
+     * @param fechaDeSalida fecha en formato dd-MM-yyyy
+     * @param horarioSalida hora de salida en formato HH:mm
+     * @param fechaDeLlegada fecha de llegada en formato dd-MM-yyyy
+     * @param horarioLlegada hora de llegada en formato HH:mm
+     * @param origen ciudad de origen del viaje
+     * @param destino ciudad de destino del viaje
+     * @param chofer chofer asignado
+     * @param vehiculo vehículo asignado
+     * @return el viaje creado
+     * @throws CiudadesIgualesExcepcion si la ciudad de origen y destino son
+     * iguales
+     * @throws VehiculoNoDisponibleExcepcion si el vehículo o chofer no están
+     * disponibles en ese horario
+     * @throws ICategoriaInvalidaException si el chofer no posee la categoría
+     * requerida para el vehículo
+     */
     public Viaje planificarViaje(String fechaDeSalida, String horarioSalida,
             String fechaDeLlegada, String horarioLlegada,
             Ciudad origen, Ciudad destino,
@@ -35,7 +62,7 @@ public class ViajeService {
         LocalDateTime nuevaSalida = LocalDateTime.parse(fechaDeSalida + " " + horarioSalida, formatter);
         LocalDateTime nuevaLlegada = LocalDateTime.parse(fechaDeLlegada + " " + horarioLlegada, formatter);
 
-        // Validar chofer
+        // Validar disponibilidad del chofer
         for (Viaje v : chofer.getViajeLista()) {
             LocalDateTime salida = LocalDateTime.parse(v.getFechaDeSalida() + " " + v.getHorarioSalida(), formatter);
             LocalDateTime llegada = LocalDateTime.parse(v.getFechaDeLlegada() + " " + v.getHorarioLlegada(), formatter);
@@ -48,14 +75,13 @@ public class ViajeService {
 
         CategoriaEnum categoriaNecesaria = null;
 
-        // Determinar qué categoría requiere el vehículo
+        // Validar categoría requerida
         if (vehiculo instanceof Colectivo) {
             categoriaNecesaria = CategoriaEnum.COLECTIVO;
         } else if (vehiculo instanceof Minibus) {
             categoriaNecesaria = CategoriaEnum.MICROBUS;
         }
 
-        // Validar si el chofer tiene esa categoría
         boolean tieneCategoria = false;
         for (ChoferCategoria cc : chofer.getCategorias()) {
             if (cc.getCategoria().getCategoria().equals(categoriaNecesaria)) {
@@ -68,7 +94,7 @@ public class ViajeService {
             throw new ICategoriaInvalidaException("El chofer no tiene la categoría requerida para este vehículo.");
         }
 
-        // Validar vehículo
+        // Validar disponibilidad del vehículo
         for (Viaje v : vehiculo.getViajeLista()) {
             LocalDateTime salida = LocalDateTime.parse(v.getFechaDeSalida() + " " + v.getHorarioSalida(), formatter);
             LocalDateTime llegada = LocalDateTime.parse(v.getFechaDeLlegada() + " " + v.getHorarioLlegada(), formatter);
@@ -90,7 +116,10 @@ public class ViajeService {
         return nuevoviaje;
     }
 
-    //4. Mostrar los viajes programados con informacion detallada
+    /**
+     * Muestra todos los {@link Viaje}s programados con información detallada
+     * por consola.
+     */
     public void mostrarViajesProgramadosDetallados() {
 
         for (Viaje viaje : listaViajes) {
@@ -107,7 +136,12 @@ public class ViajeService {
         }
     }
 
-    //5. Informe detallado de viajes que tiene que realizar un colectivo
+    /**
+     * Muestra por consola un informe detallado de los {@link Viaje}s asignados
+     * a un {@link Colectivo} específico.
+     *
+     * @param colectivo el colectivo cuyos viajes se desean consultar
+     */
     public void mostrarViajesPorColectivoDetallado(Colectivo colectivo) {
         System.out.println("Patente: " + colectivo.getPatente());
 
