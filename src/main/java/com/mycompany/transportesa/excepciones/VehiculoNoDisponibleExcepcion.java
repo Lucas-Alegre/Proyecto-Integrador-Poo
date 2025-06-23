@@ -5,8 +5,12 @@
 package com.mycompany.transportesa.excepciones;
 
 /**
- *
- * @author Usuario
+ * Excepción que se lanza cuando un {@link com.mycompany.transportesa.entidades.Vehiculo}
+ * no está disponible para ser asignado a un viaje.
+ * 
+ * @author Alegre
+ * @author Aquino
+ * @author Latour
  */
 public class VehiculoNoDisponibleExcepcion extends Exception {
     public VehiculoNoDisponibleExcepcion(String mensaje) {

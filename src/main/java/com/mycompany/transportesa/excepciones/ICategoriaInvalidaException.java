@@ -5,11 +5,18 @@
 package com.mycompany.transportesa.excepciones;
 
 /**
+ * Excepción que se lanza cuando un
+ * {@link com.mycompany.transportesa.entidades.Chofer} no posee la
+ * {@link com.mycompany.transportesa.entidades.Categoria} requerida para
+ * conducir el {@link com.mycompany.transportesa.entidades.Vehiculo} asignado.
  *
- * @author Lucas
+ * @author Alegre
+ * @author Aquino
+ * @author Latour
  */
-public class ICategoriaInvalidaException extends Exception{
-     public ICategoriaInvalidaException(String mensaje) {
+public class ICategoriaInvalidaException extends Exception {
+
+    public ICategoriaInvalidaException(String mensaje) {
         super(mensaje);
-    }    
+    }
 }

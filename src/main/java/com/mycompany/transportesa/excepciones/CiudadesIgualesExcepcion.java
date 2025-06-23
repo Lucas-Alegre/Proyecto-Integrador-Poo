@@ -5,8 +5,12 @@
 package com.mycompany.transportesa.excepciones;
 
 /**
- *
- * @author Usuario
+ * Excepción que se lanza cuando se intenta planificar un viaje en el que la ciudad de origen
+ * y la ciudad de destino son la misma.
+ * 
+ * @author Alegre
+ * @author Aquino
+ * @author Latour
  */
 
 public class CiudadesIgualesExcepcion extends Exception {
